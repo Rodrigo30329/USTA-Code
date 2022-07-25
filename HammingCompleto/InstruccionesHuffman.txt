@@ -1,0 +1,19 @@
+Instrucciones Huffman
+
+1.  Ingresar en el cuadro de texto superior un texto que contenga entre
+    10 y 15 caracteres (letras).
+
+2.  Presionar el botón de el dato que se desee obtener:
+    -Calcular la entropía.
+    -Calcular la longitud promedio.
+    -Calcular la tasa de compresión.
+    -Calcular eficiencia.
+    -Calcular codificación Huffman.
+
+3.  Si se desea guardar la trama total de este código para usarla en la
+    codificación Hamming, se debe presionar el botón "Guardar trama final."
+     Esta opción copiará la trama en el portapapeles para que esta este
+    disponible para pegarla en la codificación Hamming.
+
+4.  En caso de querer seleccionar otra codificación, presionar el botón
+    "regresar". El cual lo regresará a la ventana principal

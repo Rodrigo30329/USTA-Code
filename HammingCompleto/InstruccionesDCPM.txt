@@ -1,0 +1,23 @@
+Instrucciones DCPM
+
+1.  Ingresar la máxima diferencia para los valores de la matriz en el primer
+    cuadro de texto.
+
+2.  Ingresar el valor minímo de los valores  de la matriz en el segundo cuadro de
+    texto.
+
+3.  Ingresar el valor máximo de los valores de la matriz en el tercercuadro
+    de texto.
+
+4.  Se debe elegir la forma en la que se desea leer la matriz (Por columnas, por
+    filas o por zig zag). Al presionar esta opción se llenará una primera matriz
+    de acuerdo a las preferencias de cada usuario, se llenará una segunda matriz
+    de diferencias. se mostrará la cantidad de bits y la trama resultante.
+    
+5.  Si se desea guardar la trama total de este código para usarla en la
+    codificación Hamming, se debe  presionar el botón "Guardar trama
+    final." Esta opción copiará la trama en  el portapapeles para que esta este
+    disponible para pegarla en la codificación Hamming.
+
+6.  En caso de querer seleccionar otra codificación, presionar el botón
+    "regresar". El cual lo regresará a la  ventana principal.

@@ -1,0 +1,25 @@
+Instrucciones RLE
+
+1.  Elegir la forma en la que se desa llenar la matriz, ya sea manual o automaticamente. 
+    En caso de ser automática se debe elegir el rango de valores con los que se desee llenar
+    la matriz.
+
+    -Si se selecciona 1, la matriz se llenará con 1 y 0.
+
+    -Si se selecciona 2, la matriz se llenará con valores entre 1 y 7.
+    
+    -Si se selecciona 3, la matriz se llenará con valores entre 8 y 15.
+
+2.  Se debe elegir la forma en la que se desea llenar la matriz (Por columnas, por filas o por zig
+    zag).
+
+3.  Se debe elegir la forma en la que se desea leer la matriz (Por columnas, por filas o por zig zag).
+    Al presionar esta opción se muestran los grupos de la matriz, los valores de los grupos, el grupo
+    mayor, el valor mayor, el número de bit sin comprimir, la tasa de compresión y la trama total.
+
+4.  Si se desea guardar la trama total de este código para usarla en la codificación Hamming,
+    se debe presionar el botón "Guardar trama final." Esta opción copiará la trama en el portapapeles
+    para que esta este disponible para pegarla en la codificación Hamming.
+
+5.  En caso de querer seleccionar otra codificación, presionar el botón "regresar". El cual lo regresará
+    a la ventana principal

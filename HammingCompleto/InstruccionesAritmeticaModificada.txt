@@ -1,0 +1,19 @@
+Instrucciones Aritmetica Modificada
+
+1.  Elegir la base con la que se deseatrabajar (3, 6 o 9).
+
+2.  En el cuadro de texto ingresar el mensaje de acuerdo al alfabeto
+    correspondiente a la base que se escogió.
+
+3.  Presionar el botón para mostrar la codificación aritmetica modificada
+    correspondiente a la base que se escogió anteriormente.
+    
+4.  Si se desea guardar la trama total de este código para usarla en la
+    codificación Hamming, se debe presionar el botón "Guardar trama final."
+    Esta opción copiará la trama en el portapapeles para que esta
+    este disponible para pegarla en la codificación Hamming.
+
+5.  En caso de querer seleccionar otra
+    codificación, presionar el botón
+    "regresar". El cual lo regresará a la
+    ventana principal.   

@@ -1,0 +1,15 @@
+Instrucciones Hamming
+
+1.  Ingresar manualmente la trama de máximo 25 bits que se desea
+    codificar o pegar la trama guardada de alguna de las anteriores
+    codificaciones.
+
+2.  Presionar la opción "cálculo Hamming". Con esta opción se
+    llenarán dos matrices de acuerdo a los pasos correspondientes a esta
+    codificación.
+
+3.  Presionar la opción del código de linea que se quiera aplicar a la trama
+    codificada con Hamming (UNRZ, AMI ó HDB3)
+
+4.  En caso de querer seleccionar otra codificación, presionar el botón
+    "regresar". El cual lo regresará a la ventana principal.

@@ -1,0 +1,19 @@
+Instrucciones Shannon Fano
+
+1.  Ingresar en el cuadro te texto superior un texto palindromo (es
+    decir que se lea igual de derecha a izquiera que de izquierda a derecha).
+
+2.  El texto debe tener como minímo 3 caracteres(letras) y como máximo 25
+    caracteres (letras). 
+
+3.  Presionar botón "Mostrar Shannon Fano",
+    al presionarlo se mostrará entropía, longitud promedio, tasa de
+    compresión y la trama total.
+
+4.  Si se desea guardar la trama total de este código para usarla en la
+    codificación Hamming, se debe presionar el botón "Guardar trama final." 
+    Esta opción copiará la trama en el portapapeles para que esta
+    este disponible para pegarla en la codificación Hamming.
+
+5.  En caso de querer seleccionar otra codificación, presionar el botón
+    "regresar", el cual lo regresará a la  ventana principal.

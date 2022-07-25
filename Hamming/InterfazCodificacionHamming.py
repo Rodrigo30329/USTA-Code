@@ -1,0 +1,3676 @@
+#Codificación Hamming (José Rodrigo Ávila, Valentina Hernández y Valeria Tavera)
+
+import tkinter
+import numpy as np
+import random
+from tkinter import *
+from typing import TextIO
+
+def Hamming():
+    Mensaje=TramaUsuario.get()
+    if(len(Mensaje)>25):
+        LabelError.configure(text="La trama ingresada es de mas de 25 bits, se eliminaran bits")
+        while(len(Mensaje)>25):
+            Mensaje=Mensaje[:-1]
+    i=0
+    while i<len(Mensaje):
+        if(Mensaje[i]!="1"):
+            if(Mensaje[i]!="0"):
+                LabelError.configure(text="La trama ingresada tiene caracteres diferentes a 1 o 0, se cambiaran a 0")
+                a=Mensaje[i]
+                Mensaje=Mensaje.replace(a,"0")
+        i=i+1
+    MensajeConParidad=""
+    MensajeConParidadYDatos=""
+    ListaMensaje=list()
+    ListaMensaje2=list()
+    ListaDatos=list()
+    ListaDatos2=list()
+    Posiciones2N=[1, 2, 4, 8, 16, 32, 64, 128, 256]
+    Fila1=list()
+    Fila2=list()
+    Fila3=list()
+    Fila4=list()
+    Fila5=list()
+    DFila1=list()
+    DFila2=list()
+    DFila3=list()
+    DFila4=list()
+    DFila5=list()
+    DatosMenFila1=""
+    DatosMenFila2=""
+    DatosMenFila3=""
+    DatosMenFila4=""
+    DatosMenFila5=""
+    ParidadFila1=0
+    ParidadFila2=0
+    ParidadFila3=0
+    ParidadFila4=0
+    ParidadFila5=0
+    TramaFinal=""
+    ListaTramaFinal=list()
+    MParte2=""
+    MParte3=""
+    MParte4=""
+    MParte5=""
+    N="N"
+
+    i=0
+    par=0
+    while i < len(Mensaje):
+        ListaDatos.append(Mensaje[i])
+        par=par+1
+        Datos=("D"+str(par))
+        ListaDatos2.append(Datos)
+        i=i+1
+    i=0
+    par=0
+    while i < len(Mensaje):
+        ListaMensaje.append(Mensaje[i])
+        par=par+1
+        Datos=("D"+str(par))
+        ListaMensaje2.append(Datos)
+        i=i+1
+    i=0
+    pos=0
+    par=0
+    while i < len(Mensaje)+4:
+        pos=i+1  
+        if pos in Posiciones2N:
+            par=par+1
+            Paridad=("P"+str(par))
+            Paridad2="P"
+            ListaMensaje.insert(pos-1,Paridad2)
+            ListaMensaje2.insert(pos-1,Paridad)
+            ListaDatos.insert(pos-1,Paridad)
+        i=i+1
+    MensajeConParidad=MensajeConParidad.join(ListaMensaje)
+    MensajeConParidadYDatos=MensajeConParidadYDatos.join(ListaMensaje2)
+
+    if(len(ListaMensaje2)>0):
+        Posicion34.set(ListaMensaje2[0])
+    else:
+        Posicion34.set(N)
+    if(len(ListaMensaje2)>1):
+        Posicion35.set(ListaMensaje2[1])
+    else:
+        Posicion35.set(N)
+    if(len(ListaMensaje2)>2):
+        Posicion36.set(ListaMensaje2[2])
+    else:
+        Posicion36.set(N)
+    if(len(ListaMensaje2)>3):
+        Posicion37.set(ListaMensaje2[3])
+    else:
+        Posicion37.set(N)
+    if(len(ListaMensaje2)>4):
+        Posicion38.set(ListaMensaje2[4])
+    else:
+        Posicion38.set(N)
+    if(len(ListaMensaje2)>5):
+        Posicion39.set(ListaMensaje2[5])
+    else:
+        Posicion39.set(N)
+    if(len(ListaMensaje2)>6):
+        Posicion40.set(ListaMensaje2[6])
+    else:
+        Posicion40.set(N)
+    if(len(ListaMensaje2)>7):
+        Posicion41.set(ListaMensaje2[7])
+    else:
+        Posicion41.set(N)
+    if(len(ListaMensaje2)>8):
+        Posicion42.set(ListaMensaje2[8])
+    else:
+        Posicion42.set(N)
+    if(len(ListaMensaje2)>9):
+        Posicion43.set(ListaMensaje2[9])
+    else:
+        Posicion43.set(N)
+    if(len(ListaMensaje2)>10):
+        Posicion44.set(ListaMensaje2[10])
+    else:
+        Posicion44.set(N)
+    if(len(ListaMensaje2)>11):
+        Posicion45.set(ListaMensaje2[11])
+    else:
+        Posicion45.set(N)
+    if(len(ListaMensaje2)>12):
+        Posicion46.set(ListaMensaje2[12])
+    else:
+        Posicion46.set(N)
+    if(len(ListaMensaje2)>13):
+        Posicion47.set(ListaMensaje2[13])
+    else:
+        Posicion47.set(N)
+    if(len(ListaMensaje2)>14):
+        Posicion48.set(ListaMensaje2[14])
+    else:
+        Posicion48.set(N)
+    if(len(ListaMensaje2)>15):
+        Posicion49.set(ListaMensaje2[15])
+    else:
+        Posicion49.set(N)
+    if(len(ListaMensaje2)>16):
+        Posicion50.set(ListaMensaje2[16])
+    else:
+        Posicion50.set(N)
+    if(len(ListaMensaje2)>17):
+        Posicion51.set(ListaMensaje2[17])
+    else:
+        Posicion51.set(N)
+    if(len(ListaMensaje2)>18):
+        Posicion52.set(ListaMensaje2[18])
+    else:
+        Posicion52.set(N)
+    if(len(ListaMensaje2)>19):
+        Posicion53.set(ListaMensaje2[19])
+    else:
+        Posicion53.set(N)
+    if(len(ListaMensaje2)>20):
+        Posicion54.set(ListaMensaje2[20])
+    else:
+        Posicion54.set(N)
+    if(len(ListaMensaje2)>21):
+        Posicion55.set(ListaMensaje2[21])
+    else:
+        Posicion55.set(N)
+    if(len(ListaMensaje2)>22):
+        Posicion56.set(ListaMensaje2[22])
+    else:
+        Posicion56.set(N)
+    if(len(ListaMensaje2)>23):
+        Posicion57.set(ListaMensaje2[23])
+    else:
+        Posicion57.set(N)
+    if(len(ListaMensaje2)>24):
+        Posicion58.set(ListaMensaje2[24])
+    else:
+        Posicion58.set(N)
+    if(len(ListaMensaje2)>25):
+        Posicion59.set(ListaMensaje2[25])
+    else:
+        Posicion59.set(N)
+    if(len(ListaMensaje2)>26):
+        Posicion60.set(ListaMensaje2[26])
+    else:
+        Posicion60.set(N)
+    if(len(ListaMensaje2)>27):
+        Posicion61.set(ListaMensaje2[27])
+    else:
+        Posicion61.set(N)
+    if(len(ListaMensaje2)>28):
+        Posicion62.set(ListaMensaje2[28])
+    else:
+        Posicion62.set(N)
+    if(len(ListaMensaje2)>29):
+        Posicion63.set(ListaMensaje2[29])
+    else:
+        Posicion63.set(N)
+    if(len(ListaMensaje2)>30):
+        Posicion64.set(ListaMensaje2[30])
+    else:
+        Posicion64.set(N)
+        
+    if(len(ListaMensaje2)>0):
+        VPosicion34.set(ListaMensaje2[0])
+    else:
+        VPosicion34.set(N)
+    if(len(ListaMensaje2)>1):
+        VPosicion35.set(ListaMensaje2[1])
+    else:
+        VPosicion35.set(N)
+    if(len(ListaMensaje2)>2):
+        VPosicion36.set(ListaMensaje2[2])
+    else:
+        VPosicion36.set(N)
+    if(len(ListaMensaje2)>3):
+        VPosicion37.set(ListaMensaje2[3])
+    else:
+        VPosicion37.set(N)
+    if(len(ListaMensaje2)>4):
+        VPosicion38.set(ListaMensaje2[4])
+    else:
+        VPosicion38.set(N)
+    if(len(ListaMensaje2)>5):
+        VPosicion39.set(ListaMensaje2[5])
+    else:
+        VPosicion39.set(N)
+    if(len(ListaMensaje2)>6):
+        VPosicion40.set(ListaMensaje2[6])
+    else:
+        VPosicion40.set(N)
+    if(len(ListaMensaje2)>7):
+        VPosicion41.set(ListaMensaje2[7])
+    else:
+        VPosicion41.set(N)
+    if(len(ListaMensaje2)>8):
+        VPosicion42.set(ListaMensaje2[8])
+    else:
+        VPosicion42.set(N)
+    if(len(ListaMensaje2)>9):
+        VPosicion43.set(ListaMensaje2[9])
+    else:
+        VPosicion43.set(N)
+    if(len(ListaMensaje2)>10):
+        VPosicion44.set(ListaMensaje2[10])
+    else:
+        VPosicion44.set(N)
+    if(len(ListaMensaje2)>11):
+        VPosicion45.set(ListaMensaje2[11])
+    else:
+        VPosicion45.set(N)
+    if(len(ListaMensaje2)>12):
+        VPosicion46.set(ListaMensaje2[12])
+    else:
+        VPosicion46.set(N)
+    if(len(ListaMensaje2)>13):
+        VPosicion47.set(ListaMensaje2[13])
+    else:
+        VPosicion47.set(N)
+    if(len(ListaMensaje2)>14):
+        VPosicion48.set(ListaMensaje2[14])
+    else:
+        VPosicion48.set(N)
+    if(len(ListaMensaje2)>15):
+        VPosicion49.set(ListaMensaje2[15])
+    else:
+        VPosicion49.set(N)
+    if(len(ListaMensaje2)>16):
+        VPosicion50.set(ListaMensaje2[16])
+    else:
+        VPosicion50.set(N)
+    if(len(ListaMensaje2)>17):
+        VPosicion51.set(ListaMensaje2[17])
+    else:
+        VPosicion51.set(N)
+    if(len(ListaMensaje2)>18):
+        VPosicion52.set(ListaMensaje2[18])
+    else:
+        VPosicion52.set(N)
+    if(len(ListaMensaje2)>19):
+        VPosicion53.set(ListaMensaje2[19])
+    else:
+        VPosicion53.set(N)
+    if(len(ListaMensaje2)>20):
+        VPosicion54.set(ListaMensaje2[20])
+    else:
+        VPosicion54.set(N)
+    if(len(ListaMensaje2)>21):
+        VPosicion55.set(ListaMensaje2[21])
+    else:
+        VPosicion55.set(N)
+    if(len(ListaMensaje2)>22):
+        VPosicion56.set(ListaMensaje2[22])
+    else:
+        VPosicion56.set(N)
+    if(len(ListaMensaje2)>23):
+        VPosicion57.set(ListaMensaje2[23])
+    else:
+        VPosicion57.set(N)
+    if(len(ListaMensaje2)>24):
+        VPosicion58.set(ListaMensaje2[24])
+    else:
+        VPosicion58.set(N)
+    if(len(ListaMensaje2)>25):
+        VPosicion59.set(ListaMensaje2[25])
+    else:
+        VPosicion59.set(N)
+    if(len(ListaMensaje2)>26):
+        VPosicion60.set(ListaMensaje2[26])
+    else:
+        VPosicion60.set(N)
+    if(len(ListaMensaje2)>27):
+        VPosicion61.set(ListaMensaje2[27])
+    else:
+        VPosicion61.set(N)
+    if(len(ListaMensaje2)>28):
+        VPosicion62.set(ListaMensaje2[28])
+    else:
+        VPosicion62.set(N)
+    if(len(ListaMensaje2)>29):
+        VPosicion63.set(ListaMensaje2[29])
+    else:
+        VPosicion63.set(N)
+    
+    i=0
+    while i<len(ListaDatos):
+        if i%2==0:
+            Fila1.append(ListaDatos[i])
+        else:
+            Fila1.append("-")
+            cont=1    
+        i=i+1
+
+    i=0
+    val=0
+    cont=1
+    while i<len(ListaDatos):
+        if val<1:
+            Fila2.append("-")
+            val=val+1
+        elif(val==1):
+            Fila2.append(ListaDatos[i])  
+            cont=cont+1      
+            if(cont>2):
+                val=2
+                cont=1
+        elif(val==2):
+            Fila2.append("-")   
+            cont=cont+1
+            if(cont>2):
+                val=1
+                cont=1
+        i=i+1
+
+    i=0
+    val=0
+    cont=1
+    while i<len(ListaDatos):
+        if val<4:
+            Fila3.append("-")
+            val=val+1
+        elif(val==4):
+            Fila3.append(ListaDatos[i])  
+            cont=cont+1      
+            if(cont==4):
+                val=5
+                cont=0
+        elif(val==5):
+            Fila3.append("-")   
+            cont=cont+1
+            if(cont==4):
+                val=4
+                cont=0
+        i=i+1
+    if(len(Fila3)>3):
+        Fila3[3]="P3"
+
+    i=0
+    val=0
+    cont=1
+    while i<len(ListaDatos):
+        if val<8:
+            Fila4.append("-")
+            val=val+1
+        elif(val==8):
+            Fila4.append(ListaDatos[i])  
+            cont=cont+1      
+            if(cont==8):
+                val=9
+                cont=0
+        elif(val==9):
+            Fila4.append("-")   
+            cont=cont+1
+            if(cont==8):
+                val=8
+                cont=0
+        i=i+1
+    if(len(Fila4)>7):
+        Fila4[7]="P4"
+
+    i=0
+    val=0
+    cont=1
+    while i<len(ListaDatos):
+        if val<16:
+            Fila5.append("-")
+            val=val+1
+        elif(val==16):
+            Fila5.append(ListaDatos[i])  
+            cont=cont+1      
+            if(cont==16):
+                val=17
+                cont=0
+        elif(val==16):
+            Fila5.append("-")   
+            cont=cont+1
+            if(cont==16):
+                val=16
+                cont=0
+        i=i+1
+    if(len(Fila5)>15):
+        Fila5[15]="P5"
+
+    if(len(Fila1)>0):
+        Posicion66.set(Fila1[0])
+    else:
+        Posicion66.set(N)
+    if(len(Fila1)>1):
+        Posicion67.set(Fila1[1])
+    else:
+        Posicion67.set(N)
+    if(len(Fila1)>2):
+        Posicion68.set(Fila1[2])
+    else:
+        Posicion68.set(N)
+    if(len(Fila1)>3):
+        Posicion69.set(Fila1[3])
+    else:
+        Posicion69.set(N)
+    if(len(Fila1)>4):
+        Posicion70.set(Fila1[4])
+    else:
+        Posicion70.set(N)
+    if(len(Fila1)>5):
+        Posicion71.set(Fila1[5])
+    else:
+        Posicion71.set(N)
+    if(len(Fila1)>6):
+        Posicion72.set(Fila1[6])
+    else:
+        Posicion72.set(N)
+    if(len(Fila1)>7):
+        Posicion73.set(Fila1[7])
+    else:
+        Posicion73.set(N)
+    if(len(Fila1)>8):
+        Posicion74.set(Fila1[8])
+    else:
+        Posicion74.set(N)
+    if(len(Fila1)>9):
+        Posicion75.set(Fila1[9])
+    else:
+        Posicion75.set(N)
+    if(len(Fila1)>10):
+        Posicion76.set(Fila1[10])
+    else:
+        Posicion76.set(N)
+    if(len(Fila1)>11):
+        Posicion77.set(Fila1[11])
+    else:
+        Posicion77.set(N)
+    if(len(Fila1)>12):
+        Posicion78.set(Fila1[12])
+    else:
+        Posicion78.set(N)
+    if(len(Fila1)>13):
+        Posicion79.set(Fila1[13])
+    else:
+        Posicion79.set(N)
+    if(len(Fila1)>14):
+        Posicion80.set(Fila1[14])
+    else:
+        Posicion80.set(N)
+    if(len(Fila1)>15):
+        Posicion81.set(Fila1[15])
+    else:
+        Posicion81.set(N)
+    if(len(Fila1)>16):
+        Posicion82.set(Fila1[16])
+    else:
+        Posicion82.set(N)
+    if(len(Fila1)>17):
+        Posicion83.set(Fila1[17])
+    else:
+        Posicion83.set(N)
+    if(len(Fila1)>18):
+        Posicion84.set(Fila1[18])
+    else:
+        Posicion84.set(N)
+    if(len(Fila1)>19):
+        Posicion85.set(Fila1[19])
+    else:
+        Posicion85.set(N)
+    if(len(Fila1)>20):
+        Posicion86.set(Fila1[20])
+    else:
+        Posicion86.set(N)
+    if(len(Fila1)>21):
+        Posicion87.set(Fila1[21])
+    else:
+        Posicion87.set(N)
+    if(len(Fila1)>22):
+        Posicion88.set(Fila1[22])
+    else:
+        Posicion88.set(N)
+    if(len(Fila1)>23):
+        Posicion89.set(Fila1[23])
+    else:
+        Posicion89.set(N)
+    if(len(Fila1)>24):
+        Posicion90.set(Fila1[24])
+    else:
+        Posicion90.set(N)
+    if(len(Fila1)>25):
+        Posicion91.set(Fila1[25])
+    else:
+        Posicion91.set(N)
+    if(len(Fila1)>26):
+        Posicion92.set(Fila1[26])
+    else:
+        Posicion92.set(N)
+    if(len(Fila1)>27):
+        Posicion93.set(Fila1[27])
+    else:
+        Posicion93.set(N)
+    if(len(Fila1)>28):
+        Posicion94.set(Fila1[28])
+    else:
+        Posicion94.set(N)
+    if(len(Fila1)>28):
+        Posicion95.set(Fila1[28])
+    else:
+        Posicion95.set(N)
+    if(len(Fila2)>0):
+        Posicion98.set(Fila2[0])
+    else:
+        Posicion98.set(N)
+    if(len(Fila2)>1):
+        Posicion99.set(Fila2[1])
+    else:
+        Posicion99.set(N)
+    if(len(Fila2)>2):
+        Posicion100.set(Fila2[2])
+    else:
+        Posicion100.set(N)
+    if(len(Fila2)>3):
+        Posicion101.set(Fila2[3])
+    else:
+        Posicion101.set(N)
+    if(len(Fila2)>4):
+        Posicion102.set(Fila2[4])
+    else:
+        Posicion102.set(N)
+    if(len(Fila2)>5):
+        Posicion103.set(Fila2[5])
+    else:
+        Posicion103.set(N)
+    if(len(Fila2)>6):
+        Posicion104.set(Fila2[6])
+    else:
+        Posicion104.set(N)
+    if(len(Fila2)>7):
+        Posicion105.set(Fila2[7])
+    else:
+        Posicion105.set(N)
+    if(len(Fila2)>8):
+        Posicion106.set(Fila2[8])
+    else:
+        Posicion106.set(N)
+    if(len(Fila2)>9):
+        Posicion107.set(Fila2[9])
+    else:
+        Posicion107.set(N)
+    if(len(Fila2)>10):
+        Posicion108.set(Fila2[10])
+    else:
+        Posicion108.set(N)
+    if(len(Fila2)>11):
+        Posicion109.set(Fila2[11])
+    else:
+        Posicion109.set(N)
+    if(len(Fila2)>12):
+        Posicion110.set(Fila2[12])
+    else:
+        Posicion110.set(N)
+    if(len(Fila2)>13):
+        Posicion111.set(Fila2[13])
+    else:
+        Posicion111.set(N)
+    if(len(Fila2)>14):
+        Posicion112.set(Fila2[14])
+    else:
+        Posicion112.set(N)
+    if(len(Fila2)>15):
+        Posicion113.set(Fila2[15])
+    else:
+        Posicion113.set(N)
+    if(len(Fila2)>16):
+        Posicion114.set(Fila2[16])
+    else:
+        Posicion114.set(N)
+    if(len(Fila2)>17):
+        Posicion115.set(Fila2[17])
+    else:
+        Posicion115.set(N)
+    if(len(Fila2)>18):
+        Posicion116.set(Fila2[18])
+    else:
+        Posicion116.set(N)
+    if(len(Fila2)>19):
+        Posicion117.set(Fila2[19])
+    else:
+        Posicion117.set(N)
+    if(len(Fila2)>20):
+        Posicion118.set(Fila2[20])
+    else:
+        Posicion118.set(N)
+    if(len(Fila2)>21):
+        Posicion119.set(Fila2[21])
+    else:
+        Posicion119.set(N)
+    if(len(Fila2)>22):
+        Posicion120.set(Fila2[22])
+    else:
+        Posicion120.set(N)
+    if(len(Fila2)>23):
+        Posicion121.set(Fila2[23])
+    else:
+        Posicion121.set(N)
+    if(len(Fila2)>24):
+        Posicion122.set(Fila2[24])
+    else:
+        Posicion122.set(N)
+    if(len(Fila2)>25):
+        Posicion123.set(Fila2[25])
+    else:
+        Posicion123.set(N)
+    if(len(Fila2)>26):
+        Posicion124.set(Fila2[26])
+    else:
+        Posicion124.set(N)
+    if(len(Fila2)>27):
+        Posicion125.set(Fila2[27])
+    else:
+        Posicion125.set(N)
+    if(len(Fila2)>28):
+        Posicion126.set(Fila2[28])
+    else:
+        Posicion126.set(N)
+    if(len(Fila2)>29):
+        Posicion127.set(Fila2[29])
+    else:
+        Posicion127.set(N)
+    if(len(Fila3)>0):
+        Posicion130.set(Fila3[0])
+    else:
+        Posicion130.set(N)
+    if(len(Fila3)>1):
+        Posicion131.set(Fila3[1])
+    else:
+        Posicion131.set(N)
+    if(len(Fila3)>2):
+        Posicion132.set(Fila3[2])
+    else:
+        Posicion132.set(N)
+    if(len(Fila3)>3):
+        Posicion133.set(Fila3[3])
+    else:
+        Posicion133.set(N)
+    if(len(Fila3)>4):
+        Posicion134.set(Fila3[4])
+    else:
+        Posicion134.set(N)
+    if(len(Fila3)>5):
+        Posicion135.set(Fila3[5])
+    else:
+        Posicion135.set(N)
+    if(len(Fila3)>6):
+        Posicion136.set(Fila3[6])
+    else:
+        Posicion136.set(N)
+    if(len(Fila3)>7):
+        Posicion137.set(Fila3[7])
+    else:
+        Posicion137.set(N)
+    if(len(Fila3)>8):
+        Posicion138.set(Fila3[8])
+    else:
+        Posicion138.set(N)
+    if(len(Fila3)>9):
+        Posicion139.set(Fila3[9])
+    else:
+        Posicion139.set(N)
+    if(len(Fila3)>10):
+        Posicion140.set(Fila3[10])
+    else:
+        Posicion140.set(N)
+    if(len(Fila3)>11):
+        Posicion141.set(Fila3[11])
+    else:
+        Posicion141.set(N)
+    if(len(Fila3)>12):
+        Posicion142.set(Fila3[12])
+    else:
+        Posicion142.set(N)
+    if(len(Fila3)>13):
+        Posicion143.set(Fila3[13])
+    else:
+        Posicion143.set(N)
+    if(len(Fila3)>14):
+        Posicion144.set(Fila3[14])
+    else:
+        Posicion144.set(N)
+    if(len(Fila3)>15):
+        Posicion145.set(Fila3[15])
+    else:
+        Posicion145.set(N)
+    if(len(Fila3)>16):
+        Posicion146.set(Fila3[16])
+    else:
+        Posicion146.set(N)
+    if(len(Fila3)>17):
+        Posicion147.set(Fila3[17])
+    else:
+        Posicion147.set(N)
+    if(len(Fila3)>18):
+        Posicion148.set(Fila3[18])
+    else:
+        Posicion148.set(N)
+    if(len(Fila3)>19):
+        Posicion149.set(Fila3[19])
+    else:
+        Posicion149.set(N)
+    if(len(Fila3)>20):
+        Posicion150.set(Fila3[20])
+    else:
+        Posicion150.set(N)
+    if(len(Fila3)>21):
+        Posicion151.set(Fila3[21])
+    else:
+        Posicion151.set(N)
+    if(len(Fila3)>22):
+        Posicion152.set(Fila3[22])
+    else:
+        Posicion152.set(N)
+    if(len(Fila3)>23):
+        Posicion153.set(Fila3[23])
+    else:
+        Posicion153.set(N)
+    if(len(Fila3)>24):
+        Posicion154.set(Fila3[24])
+    else:
+        Posicion154.set(N)
+    if(len(Fila3)>25):
+        Posicion155.set(Fila3[25])
+    else:
+        Posicion155.set(N)
+    if(len(Fila3)>26):
+        Posicion156.set(Fila3[26])
+    else:
+        Posicion156.set(N)
+    if(len(Fila3)>27):
+        Posicion157.set(Fila3[27])
+    else:
+        Posicion157.set(N)
+    if(len(Fila3)>28):
+        Posicion158.set(Fila3[28])
+    else:
+        Posicion158.set(N)
+    if(len(Fila3)>29):
+        Posicion159.set(Fila3[29])
+    else:
+        Posicion159.set(N)
+    if(len(Fila4)>0):
+        Posicion162.set(Fila4[0])
+    else:
+        Posicion162.set(N)
+    if(len(Fila4)>1):
+        Posicion163.set(Fila4[1])
+    else:
+        Posicion163.set(N)
+    if(len(Fila4)>2):
+        Posicion164.set(Fila4[2])
+    else:
+        Posicion164.set(N)
+    if(len(Fila4)>3):
+        Posicion165.set(Fila4[3])
+    else:
+        Posicion165.set(N)
+    if(len(Fila4)>4):
+        Posicion166.set(Fila4[4])
+    else:
+        Posicion166.set(N)
+    if(len(Fila4)>5):
+        Posicion167.set(Fila4[5])
+    else:
+        Posicion167.set(N)
+    if(len(Fila4)>6):
+        Posicion168.set(Fila4[6])
+    else:
+        Posicion168.set(N)
+    if(len(Fila4)>7):
+        Posicion169.set(Fila4[7])
+    else:
+        Posicion169.set(N)
+    if(len(Fila4)>8):
+        Posicion170.set(Fila4[8])
+    else:
+        Posicion170.set(N)
+    if(len(Fila4)>9):
+        Posicion171.set(Fila4[9])
+    else:
+        Posicion171.set(N)
+    if(len(Fila4)>10):
+        Posicion172.set(Fila4[10])
+    else:
+        Posicion172.set(N)
+    if(len(Fila4)>11):
+        Posicion173.set(Fila4[11])
+    else:
+        Posicion173.set(N)
+    if(len(Fila4)>12):
+        Posicion174.set(Fila4[12])
+    else:
+        Posicion174.set(N)
+    if(len(Fila4)>13):
+        Posicion175.set(Fila4[13])
+    else:
+        Posicion175.set(N)
+    if(len(Fila4)>14):
+        Posicion176.set(Fila4[14])
+    else:
+        Posicion176.set(N)
+    if(len(Fila4)>15):
+        Posicion177.set(Fila4[15])
+    else:
+        Posicion177.set(N)
+    if(len(Fila4)>16):
+        Posicion178.set(Fila4[16])
+    else:
+        Posicion178.set(N)
+    if(len(Fila4)>17):
+        Posicion179.set(Fila4[17])
+    else:
+        Posicion179.set(N)
+    if(len(Fila4)>18):
+        Posicion180.set(Fila4[18])
+    else:
+        Posicion180.set(N)
+    if(len(Fila4)>19):
+        Posicion181.set(Fila4[19])
+    else:
+        Posicion181.set(N)
+    if(len(Fila4)>20):
+        Posicion182.set(Fila4[20])
+    else:
+        Posicion182.set(N)
+    if(len(Fila4)>21):
+        Posicion183.set(Fila4[21])
+    else:
+        Posicion183.set(N)
+    if(len(Fila4)>22):
+        Posicion184.set(Fila4[22])
+    else:
+        Posicion184.set(N)
+    if(len(Fila4)>23):
+        Posicion185.set(Fila4[23])
+    else:
+        Posicion185.set(N)
+    if(len(Fila4)>24):
+        Posicion186.set(Fila4[24])
+    else:
+        Posicion186.set(N)
+    if(len(Fila4)>25):
+        Posicion187.set(Fila4[25])
+    else:
+        Posicion187.set(N)
+    if(len(Fila4)>26):
+        Posicion188.set(Fila4[26])
+    else:
+        Posicion188.set(N)
+    if(len(Fila4)>27):
+        Posicion189.set(Fila4[27])
+    else:
+        Posicion189.set(N)
+    if(len(Fila4)>28):
+        Posicion190.set(Fila4[28])
+    else:
+        Posicion190.set(N)
+    if(len(Fila4)>29):
+        Posicion191.set(Fila4[29])
+    else:
+        Posicion191.set(N)
+    if(len(Fila5)>0):
+        Posicion194.set(Fila5[0])
+    else:
+        Posicion194.set(N)
+    if(len(Fila5)>1):
+        Posicion195.set(Fila5[1])
+    else:
+        Posicion195.set(N)
+    if(len(Fila5)>2):
+        Posicion196.set(Fila5[2])
+    else:
+        Posicion196.set(N)
+    if(len(Fila5)>3):
+        Posicion197.set(Fila5[3])
+    else:
+        Posicion197.set(N)
+    if(len(Fila5)>4):
+        Posicion198.set(Fila5[4])
+    else:
+        Posicion198.set(N)
+    if(len(Fila5)>5):
+        Posicion199.set(Fila5[5])
+    else:
+        Posicion199.set(N)
+    if(len(Fila5)>6):
+        Posicion200.set(Fila5[6])
+    else:
+        Posicion200.set(N)
+    if(len(Fila5)>7):
+        Posicion201.set(Fila5[7])
+    else:
+        Posicion201.set(N)
+    if(len(Fila5)>8):
+        Posicion202.set(Fila5[8])
+    else:
+        Posicion202.set(N)
+    if(len(Fila5)>9):
+        Posicion203.set(Fila5[9])
+    else:
+        Posicion203.set(N)
+    if(len(Fila5)>10):
+        Posicion204.set(Fila5[10])
+    else:
+        Posicion204.set(N)
+    if(len(Fila5)>11):
+        Posicion205.set(Fila5[11])
+    else:
+        Posicion205.set(N)
+    if(len(Fila5)>12):
+        Posicion206.set(Fila5[12])
+    else:
+        Posicion206.set(N)
+    if(len(Fila5)>13):
+        Posicion207.set(Fila5[13])
+    else:
+        Posicion207.set(N)
+    if(len(Fila5)>14):
+        Posicion208.set(Fila5[14])
+    else:
+        Posicion208.set(N)
+    if(len(Fila5)>15):
+        Posicion209.set(Fila5[15])
+    else:
+        Posicion209.set(N)
+    if(len(Fila5)>16):
+        Posicion210.set(Fila5[16])
+    else:
+        Posicion210.set(N)
+    if(len(Fila5)>17):
+        Posicion211.set(Fila5[17])
+    else:
+        Posicion211.set(N)
+    if(len(Fila5)>18):
+        Posicion212.set(Fila5[18])
+    else:
+        Posicion212.set(N)
+    if(len(Fila5)>19):
+        Posicion213.set(Fila5[19])
+    else:
+        Posicion213.set(N)
+    if(len(Fila5)>20):
+        Posicion214.set(Fila5[20])
+    else:
+        Posicion214.set(N)
+    if(len(Fila5)>21):
+        Posicion215.set(Fila5[21])
+    else:
+        Posicion215.set(N)
+    if(len(Fila5)>22):
+        Posicion216.set(Fila5[22])
+    else:
+        Posicion216.set(N)
+    if(len(Fila5)>23):
+        Posicion217.set(Fila5[23])
+    else:
+        Posicion217.set(N)
+    if(len(Fila5)>24):
+        Posicion218.set(Fila5[24])
+    else:
+        Posicion218.set(N)
+    if(len(Fila5)>25):
+        Posicion219.set(Fila5[25])
+    else:
+        Posicion219.set(N)
+    if(len(Fila5)>26):
+        Posicion220.set(Fila5[26])
+    else:
+        Posicion220.set(N)
+    if(len(Fila5)>27):
+        Posicion221.set(Fila5[27])
+    else:
+        Posicion221.set(N)
+    if(len(Fila5)>28):
+        Posicion222.set(Fila5[28])
+    else:
+        Posicion222.set(N)
+    if(len(Fila5)>29):
+        Posicion223.set(Fila5[29])
+    else:
+        Posicion223.set(N)
+    #Lista Datos
+    i=0
+    while i<len(ListaMensaje):
+        if i%2==0:
+            DFila1.append(ListaMensaje[i])
+        else:
+            DFila1.append("-")
+            cont=1    
+        i=i+1
+
+    i=0
+    val=0
+    cont=1
+    while i<len(ListaMensaje):
+        if val<1:
+            DFila2.append("-")
+            val=val+1
+        elif(val==1):
+            DFila2.append(ListaMensaje[i])  
+            cont=cont+1      
+            if(cont>2):
+                val=2
+                cont=1
+        elif(val==2):
+            DFila2.append("-")   
+            cont=cont+1
+            if(cont>2):
+                val=1
+                cont=1
+        i=i+1
+
+    i=0
+    val=0
+    cont=1
+    while i<len(ListaMensaje):
+        if val<4:
+            DFila3.append("-")
+            val=val+1
+        elif(val==4):
+            DFila3.append(ListaMensaje[i])  
+            cont=cont+1      
+            if(cont==4):
+                val=5
+                cont=0
+        elif(val==5):
+            DFila3.append("-")   
+            cont=cont+1
+            if(cont==4):
+                val=4
+                cont=0
+        i=i+1
+
+    i=0
+    val=0
+    cont=1
+    while i<len(ListaMensaje):
+        if val<8:
+            DFila4.append("-")
+            val=val+1
+        elif(val==8):
+            DFila4.append(ListaMensaje[i])  
+            cont=cont+1      
+            if(cont==8):
+                val=9
+                cont=0
+        elif(val==9):
+            DFila4.append("-")   
+            cont=cont+1
+            if(cont==8):
+                val=8
+                cont=0
+        i=i+1
+
+    i=0
+    val=0
+    cont=1
+    while i<len(ListaMensaje):
+        if val<16:
+            DFila5.append("-")
+            val=val+1
+        elif(val==16):
+            DFila5.append(ListaMensaje[i])  
+            cont=cont+1      
+            if(cont==16):
+                val=17
+                cont=0
+        elif(val==16):
+            DFila5.append("-")   
+            cont=cont+1
+            if(cont==16):
+                val=16
+                cont=0
+        i=i+1
+
+    DatosMenFila1=DatosMenFila1.join(DFila1)
+    DatosMenFila2=DatosMenFila2.join(DFila2)
+    DatosMenFila3=DatosMenFila3.join(DFila3)
+    DatosMenFila4=DatosMenFila4.join(DFila4)
+    DatosMenFila5=DatosMenFila5.join(DFila5)
+
+    ParidadFila1=DatosMenFila1.count("1")
+    ParidadFila2=DatosMenFila2.count("1")
+    ParidadFila3=DatosMenFila3.count("1")
+    ParidadFila4=DatosMenFila4.count("1")
+    ParidadFila5=DatosMenFila5.count("1")
+    
+    if(len(DFila1)>0):
+        if(ParidadFila1%2==0):
+            DFila1[0]="0"
+        else:
+            DFila1[0]="1"
+    if(len(DFila2)>2):
+        if(ParidadFila2%2==0):
+            DFila2[1]="0"
+        else:
+            DFila2[1]="1"
+    if(len(DFila3)>4):
+        if(ParidadFila3%2==0):
+            DFila3[3]="0"
+        else:
+            DFila3[3]="1"
+    if(len(DFila4)>8):
+        if(ParidadFila4%2==0):
+            DFila4[7]="0"
+        else:
+            DFila4[7]="1"
+    if(len(DFila5)>15):
+        if(ParidadFila5%2==0):
+            DFila5[15]="0"
+        else:
+            DFila5[15]="1"
+
+    if(len(DFila1)>0):
+        VPosicion98.set(DFila1[0])
+    else:
+        VPosicion98.set(N)
+    if(len(DFila1)>1):
+        VPosicion99.set(DFila1[1])
+    else:
+        VPosicion99.set(N)
+    if(len(DFila1)>2):
+        VPosicion100.set(DFila1[2])
+    else:
+        VPosicion100.set(N)
+    if(len(DFila1)>3):
+        VPosicion101.set(DFila1[3])
+    else:
+        VPosicion101.set(N)
+    if(len(DFila1)>4):
+        VPosicion102.set(DFila1[4])
+    else:
+        VPosicion102.set(N)
+    if(len(DFila1)>5):
+        VPosicion103.set(DFila1[5])
+    else:
+        VPosicion103.set(N)
+    if(len(DFila1)>6):
+        VPosicion104.set(DFila1[6])
+    else:
+        VPosicion104.set(N)
+    if(len(DFila1)>7):
+        VPosicion105.set(DFila1[7])
+    else:
+        VPosicion105.set(N)
+    if(len(DFila1)>8):
+        VPosicion106.set(DFila1[8])
+    else:
+        VPosicion106.set(N)
+    if(len(DFila1)>9):
+        VPosicion107.set(DFila1[9])
+    else:
+        VPosicion107.set(N)
+    if(len(DFila1)>10):
+        VPosicion108.set(DFila1[10])
+    else:
+        VPosicion108.set(N)
+    if(len(DFila1)>11):
+        VPosicion109.set(DFila1[11])
+    else:
+        VPosicion109.set(N)
+    if(len(DFila1)>12):
+        VPosicion110.set(DFila1[12])
+    else:
+        VPosicion110.set(N)
+    if(len(DFila1)>13):
+        VPosicion111.set(DFila1[13])
+    else:
+        VPosicion111.set(N)
+    if(len(DFila1)>14):
+        VPosicion112.set(DFila1[14])
+    else:
+        VPosicion112.set(N)
+    if(len(DFila1)>15):
+        VPosicion113.set(DFila1[15])
+    else:
+        VPosicion113.set(N)
+    if(len(DFila1)>16):
+        VPosicion114.set(DFila1[16])
+    else:
+        VPosicion114.set(N)
+    if(len(DFila1)>17):
+        VPosicion115.set(DFila1[17])
+    else:
+        VPosicion115.set(N)
+    if(len(DFila1)>18):
+        VPosicion116.set(DFila1[18])
+    else:
+        VPosicion116.set(N)
+    if(len(DFila1)>19):
+        VPosicion117.set(DFila1[19])
+    else:
+        VPosicion117.set(N)
+    if(len(DFila1)>20):
+        VPosicion118.set(DFila1[20])
+    else:
+        VPosicion118.set(N)
+    if(len(DFila1)>21):
+        VPosicion119.set(DFila1[21])
+    else:
+        VPosicion119.set(N)
+    if(len(DFila1)>22):
+        VPosicion120.set(DFila1[22])
+    else:
+        VPosicion120.set(N)
+    if(len(DFila1)>23):
+        VPosicion121.set(DFila1[23])
+    else:
+        VPosicion121.set(N)
+    if(len(DFila1)>24):
+        VPosicion122.set(DFila1[24])
+    else:
+        VPosicion122.set(N)
+    if(len(DFila1)>25):
+        VPosicion123.set(DFila1[25])
+    else:
+        VPosicion123.set(N)
+    if(len(DFila1)>26):
+        VPosicion124.set(DFila1[26])
+    else:
+        VPosicion124.set(N)
+    if(len(DFila1)>27):
+        VPosicion125.set(DFila1[27])
+    else:
+        VPosicion125.set(N)
+    if(len(DFila1)>28):
+        VPosicion126.set(DFila1[28])
+    else:
+        VPosicion126.set(N)
+    if(len(DFila1)>29):
+        VPosicion127.set(DFila1[29])
+    else:
+        VPosicion127.set(N)
+    if(len(DFila2)>0):
+        VPosicion130.set(DFila2[0])
+    else:
+        VPosicion130.set(N)
+    if(len(DFila2)>1):
+        VPosicion131.set(DFila2[1])
+    else:
+        VPosicion131.set(N)
+    if(len(DFila2)>2):
+        VPosicion132.set(DFila2[2])
+    else:
+        VPosicion132.set(N)
+    if(len(DFila2)>3):
+        VPosicion133.set(DFila2[3])
+    else:
+        VPosicion133.set(N)
+    if(len(DFila2)>4):
+        VPosicion134.set(DFila2[4])
+    else:
+        VPosicion134.set(N)
+    if(len(DFila2)>5):
+        VPosicion135.set(DFila2[5])
+    else:
+        VPosicion135.set(N)
+    if(len(DFila2)>6):
+        VPosicion136.set(DFila2[6])
+    else:
+        VPosicion136.set(N)
+    if(len(DFila2)>7):
+        VPosicion137.set(DFila2[7])
+    else:
+        VPosicion137.set(N)
+    if(len(DFila2)>8):
+        VPosicion138.set(DFila2[8])
+    else:
+        VPosicion138.set(N)
+    if(len(DFila2)>9):
+        VPosicion139.set(DFila2[9])
+    else:
+        VPosicion139.set(N)
+    if(len(DFila2)>10):
+        VPosicion140.set(DFila2[10])
+    else:
+        VPosicion140.set(N)
+    if(len(DFila2)>11):
+        VPosicion141.set(DFila2[11])
+    else:
+        VPosicion141.set(N)
+    if(len(DFila2)>12):
+        VPosicion142.set(DFila2[12])
+    else:
+        VPosicion142.set(N)
+    if(len(DFila2)>13):
+        VPosicion143.set(DFila2[13])
+    else:
+        VPosicion143.set(N)
+    if(len(DFila2)>14):
+        VPosicion144.set(DFila2[14])
+    else:
+        VPosicion144.set(N)
+    if(len(DFila2)>15):
+        VPosicion145.set(DFila2[15])
+    else:
+        VPosicion145.set(N)
+    if(len(DFila2)>16):
+        VPosicion146.set(DFila2[16])
+    else:
+        VPosicion146.set(N)
+    if(len(DFila2)>17):
+        VPosicion147.set(DFila2[17])
+    else:
+        VPosicion147.set(N)
+    if(len(DFila2)>18):
+        VPosicion148.set(DFila2[18])
+    else:
+        VPosicion148.set(N)
+    if(len(DFila2)>19):
+        VPosicion149.set(DFila2[19])
+    else:
+        VPosicion149.set(N)
+    if(len(DFila2)>20):
+        VPosicion150.set(DFila2[20])
+    else:
+        VPosicion150.set(N)
+    if(len(DFila2)>21):
+        VPosicion151.set(DFila2[21])
+    else:
+        VPosicion151.set(N)
+    if(len(DFila2)>22):
+        VPosicion152.set(DFila2[22])
+    else:
+        VPosicion152.set(N)
+    if(len(DFila2)>23):
+        VPosicion153.set(DFila2[23])
+    else:
+        VPosicion153.set(N)
+    if(len(DFila2)>24):
+        VPosicion154.set(DFila2[24])
+    else:
+        VPosicion154.set(N)
+    if(len(DFila2)>25):
+        VPosicion155.set(DFila2[25])
+    else:
+        VPosicion155.set(N)
+    if(len(DFila2)>26):
+        VPosicion156.set(DFila2[26])
+    else:
+        VPosicion156.set(N)
+    if(len(DFila2)>27):
+        VPosicion157.set(DFila2[27])
+    else:
+        VPosicion157.set(N)
+    if(len(DFila2)>28):
+        VPosicion158.set(DFila2[28])
+    else:
+        VPosicion158.set(N)
+    if(len(DFila2)>29):
+        VPosicion159.set(DFila2[29])
+    else:
+        VPosicion159.set(N)
+    if(len(DFila3)>0):
+        VPosicion162.set(DFila3[0])
+    else:
+        VPosicion162.set(N)
+    if(len(DFila3)>1):
+        VPosicion163.set(DFila3[1])
+    else:
+        VPosicion163.set(N)
+    if(len(DFila3)>2):
+        VPosicion164.set(DFila3[2])
+    else:
+        VPosicion164.set(N)
+    if(len(DFila3)>3):
+        VPosicion165.set(DFila3[3])
+    else:
+        VPosicion165.set(N)
+    if(len(DFila3)>4):
+        VPosicion166.set(DFila3[4])
+    else:
+        VPosicion166.set(N)
+    if(len(DFila3)>5):
+        VPosicion167.set(DFila3[5])
+    else:
+        VPosicion167.set(N)
+    if(len(DFila3)>6):
+        VPosicion168.set(DFila3[6])
+    else:
+        VPosicion168.set(N)
+    if(len(DFila3)>7):
+        VPosicion169.set(DFila3[7])
+    else:
+        VPosicion169.set(N)
+    if(len(DFila3)>8):
+        VPosicion170.set(DFila3[8])
+    else:
+        VPosicion170.set(N)
+    if(len(DFila3)>9):
+        VPosicion171.set(DFila3[9])
+    else:
+        VPosicion171.set(N)
+    if(len(DFila3)>10):
+        VPosicion172.set(DFila3[10])
+    else:
+        VPosicion172.set(N)
+    if(len(DFila3)>11):
+        VPosicion173.set(DFila3[11])
+    else:
+        VPosicion173.set(N)
+    if(len(DFila3)>12):
+        VPosicion174.set(DFila3[12])
+    else:
+        VPosicion174.set(N)
+    if(len(DFila3)>13):
+        VPosicion175.set(DFila3[13])
+    else:
+        VPosicion175.set(N)
+    if(len(DFila3)>14):
+        VPosicion176.set(DFila3[14])
+    else:
+        VPosicion176.set(N)
+    if(len(DFila3)>15):
+        VPosicion177.set(DFila3[15])
+    else:
+        VPosicion177.set(N)
+    if(len(DFila3)>16):
+        VPosicion178.set(DFila3[16])
+    else:
+        VPosicion178.set(N)
+    if(len(DFila3)>17):
+        VPosicion179.set(DFila3[17])
+    else:
+        VPosicion179.set(N)
+    if(len(DFila3)>18):
+        VPosicion180.set(DFila3[18])
+    else:
+        VPosicion180.set(N)
+    if(len(DFila3)>19):
+        VPosicion181.set(DFila3[19])
+    else:
+        VPosicion181.set(N)
+    if(len(DFila3)>20):
+        VPosicion182.set(DFila3[20])
+    else:
+        VPosicion182.set(N)
+    if(len(DFila3)>21):
+        VPosicion183.set(DFila3[21])
+    else:
+        VPosicion183.set(N)
+    if(len(DFila3)>22):
+        VPosicion184.set(DFila3[22])
+    else:
+        VPosicion184.set(N)
+    if(len(DFila3)>23):
+        VPosicion185.set(DFila3[23])
+    else:
+        VPosicion185.set(N)
+    if(len(DFila3)>24):
+        VPosicion186.set(DFila3[24])
+    else:
+        VPosicion186.set(N)
+    if(len(DFila3)>25):
+        VPosicion187.set(DFila3[25])
+    else:
+        VPosicion187.set(N)
+    if(len(DFila3)>26):
+        VPosicion188.set(DFila3[26])
+    else:
+        VPosicion188.set(N)
+    if(len(DFila3)>27):
+        VPosicion189.set(DFila3[27])
+    else:
+        VPosicion189.set(N)
+    if(len(DFila3)>28):
+        VPosicion190.set(DFila3[28])
+    else:
+        VPosicion190.set(N)
+    if(len(DFila3)>29):
+        VPosicion191.set(DFila3[29])
+    else:
+        VPosicion191.set(N)
+    if(len(DFila4)>0):
+        VPosicion194.set(DFila4[0])
+    else:
+        VPosicion194.set(N)
+    if(len(DFila4)>1):
+        VPosicion195.set(DFila4[1])
+    else:
+        VPosicion195.set(N)
+    if(len(DFila4)>2):
+        VPosicion196.set(DFila4[2])
+    else:
+        VPosicion196.set(N)
+    if(len(DFila4)>3):
+        VPosicion197.set(DFila4[3])
+    else:
+        VPosicion197.set(N)
+    if(len(DFila4)>4):
+        VPosicion198.set(DFila4[4])
+    else:
+        VPosicion198.set(N)
+    if(len(DFila4)>5):
+        VPosicion199.set(DFila4[5])
+    else:
+        VPosicion199.set(N)
+    if(len(DFila4)>6):
+        VPosicion200.set(DFila4[6])
+    else:
+        VPosicion200.set(N)
+    if(len(DFila4)>7):
+        VPosicion201.set(DFila4[7])
+    else:
+        VPosicion201.set(N)
+    if(len(DFila4)>8):
+        VPosicion202.set(DFila4[8])
+    else:
+        VPosicion202.set(N)
+    if(len(DFila4)>9):
+        VPosicion203.set(DFila4[9])
+    else:
+        VPosicion203.set(N)
+    if(len(DFila4)>10):
+        VPosicion204.set(DFila4[10])
+    else:
+        VPosicion204.set(N)
+    if(len(DFila4)>11):
+        VPosicion205.set(DFila4[11])
+    else:
+        VPosicion205.set(N)
+    if(len(DFila4)>12):
+        VPosicion206.set(DFila4[12])
+    else:
+        VPosicion206.set(N)
+    if(len(DFila4)>13):
+        VPosicion207.set(DFila4[13])
+    else:
+        VPosicion207.set(N)
+    if(len(DFila4)>14):
+        VPosicion208.set(DFila4[14])
+    else:
+        VPosicion208.set(N)
+    if(len(DFila4)>15):
+        VPosicion209.set(DFila4[15])
+    else:
+        VPosicion209.set(N)
+    if(len(DFila4)>16):
+        VPosicion210.set(DFila4[16])
+    else:
+        VPosicion210.set(N)
+    if(len(DFila4)>17):
+        VPosicion211.set(DFila4[17])
+    else:
+        VPosicion211.set(N)
+    if(len(DFila4)>18):
+        VPosicion212.set(DFila4[18])
+    else:
+        VPosicion212.set(N)
+    if(len(DFila4)>19):
+        VPosicion213.set(DFila4[19])
+    else:
+        VPosicion213.set(N)
+    if(len(DFila4)>20):
+        VPosicion214.set(DFila4[20])
+    else:
+        VPosicion214.set(N)
+    if(len(DFila4)>21):
+        VPosicion215.set(DFila4[21])
+    else:
+        VPosicion215.set(N)
+    if(len(DFila4)>22):
+        VPosicion216.set(DFila4[22])
+    else:
+        VPosicion216.set(N)
+    if(len(DFila4)>23):
+        VPosicion217.set(DFila4[23])
+    else:
+        VPosicion217.set(N)
+    if(len(DFila4)>24):
+        VPosicion218.set(DFila4[24])
+    else:
+        VPosicion218.set(N)
+    if(len(DFila4)>25):
+        VPosicion219.set(DFila4[25])
+    else:
+        VPosicion219.set(N)
+    if(len(DFila4)>26):
+        VPosicion220.set(DFila4[26])
+    else:
+        VPosicion220.set(N)
+    if(len(DFila4)>27):
+        VPosicion221.set(DFila4[27])
+    else:
+        VPosicion221.set(N)
+    if(len(DFila4)>28):
+        VPosicion222.set(DFila4[28])
+    else:
+        VPosicion222.set(N)
+    if(len(DFila4)>29):
+        VPosicion223.set(DFila4[29])
+    else:
+        VPosicion223.set(N)
+    if(len(DFila5)>0):
+        VPosicion226.set(DFila5[0])
+    else:
+        VPosicion226.set(N)
+    if(len(DFila5)>1):
+        VPosicion227.set(DFila5[1])
+    else:
+        VPosicion227.set(N)
+    if(len(DFila5)>2):
+        VPosicion228.set(DFila5[2])
+    else:
+        VPosicion228.set(N)
+    if(len(DFila5)>3):
+        VPosicion229.set(DFila5[3])
+    else:
+        VPosicion229.set(N)
+    if(len(DFila5)>4):
+        VPosicion230.set(DFila5[4])
+    else:
+        VPosicion230.set(N)
+    if(len(DFila5)>5):
+        VPosicion231.set(DFila5[5])
+    else:
+        VPosicion231.set(N)
+    if(len(DFila5)>6):
+        VPosicion232.set(DFila5[6])
+    else:
+        VPosicion232.set(N)
+    if(len(DFila5)>7):
+        VPosicion233.set(DFila5[7])
+    else:
+        VPosicion233.set(N)
+    if(len(DFila5)>8):
+        VPosicion234.set(DFila5[8])
+    else:
+        VPosicion234.set(N)
+    if(len(DFila5)>9):
+        VPosicion235.set(DFila5[9])
+    else:
+        VPosicion235.set(N)
+    if(len(DFila5)>10):
+        VPosicion236.set(DFila5[10])
+    else:
+        VPosicion236.set(N)
+    if(len(DFila5)>11):
+        VPosicion237.set(DFila5[11])
+    else:
+        VPosicion237.set(N)
+    if(len(DFila5)>12):
+        VPosicion238.set(DFila5[12])
+    else:
+        VPosicion238.set(N)
+    if(len(DFila5)>13):
+        VPosicion239.set(DFila5[13])
+    else:
+        VPosicion239.set(N)
+    if(len(DFila5)>14):
+        VPosicion240.set(DFila5[14])
+    else:
+        VPosicion240.set(N)
+    if(len(DFila5)>15):
+        VPosicion241.set(DFila5[15])
+    else:
+        VPosicion241.set(N)
+    if(len(DFila5)>16):
+        VPosicion242.set(DFila5[16])
+    else:
+        VPosicion242.set(N)
+    if(len(DFila5)>17):
+        VPosicion243.set(DFila5[17])
+    else:
+        VPosicion243.set(N)
+    if(len(DFila5)>18):
+        VPosicion244.set(DFila5[18])
+    else:
+        VPosicion244.set(N)
+    if(len(DFila5)>19):
+        VPosicion245.set(DFila5[19])
+    else:
+        VPosicion245.set(N)
+    if(len(DFila5)>20):
+        VPosicion246.set(DFila5[20])
+    else:
+        VPosicion246.set(N)
+    if(len(DFila5)>21):
+        VPosicion247.set(DFila5[21])
+    else:
+        VPosicion247.set(N)
+    if(len(DFila5)>22):
+        VPosicion248.set(DFila5[22])
+    else:
+        VPosicion248.set(N)
+    if(len(DFila5)>23):
+        VPosicion249.set(DFila5[23])
+    else:
+        VPosicion249.set(N)
+    if(len(DFila5)>24):
+        VPosicion250.set(DFila5[24])
+    else:
+        VPosicion250.set(N)
+    if(len(DFila5)>25):
+        VPosicion251.set(DFila5[25])
+    else:
+        VPosicion251.set(N)
+    if(len(DFila5)>26):
+        VPosicion252.set(DFila5[26])
+    else:
+        VPosicion252.set(N)
+    if(len(DFila5)>27):
+        VPosicion253.set(DFila5[27])
+    else:
+        VPosicion253.set(N)
+    if(len(DFila5)>28):
+        VPosicion254.set(DFila5[28])
+    else:
+        VPosicion254.set(N)
+    if(len(DFila5)>29):
+        VPosicion255.set(DFila5[29])
+    else:
+        VPosicion255.set(N)    
+
+    DatosMenFila1="".join(DFila1)
+    DatosMenFila2="".join(DFila2)
+    DatosMenFila3="".join(DFila3)
+    DatosMenFila4="".join(DFila4)
+    DatosMenFila5="".join(DFila5)
+
+    TramaFinal=str(DFila1[0])
+    Parte2=DFila2[1:3]
+    MParte2=MParte2.join(Parte2)
+    TramaFinal=TramaFinal+MParte2
+    Parte3=DFila3[3:7]
+    MParte3=MParte3.join(Parte3)
+    TramaFinal=TramaFinal+MParte3
+    Parte4=DFila4[7:15]
+    MParte4=MParte4.join(Parte4)
+    TramaFinal=TramaFinal+MParte4
+    Parte5=DFila5[15:-1]
+    MParte5=MParte5.join(Parte5)
+    TramaFinal=TramaFinal+MParte5+str(DFila5[-1])
+    TextoTramaFinal=("La trama final es: ")
+    MostrarTramaTotalMensaje.configure(text=TextoTramaFinal)
+    TramaTotal.set(TramaFinal)
+    ListaTramaFinal.extend(DFila1[0])
+    ListaTramaFinal.extend(Parte2)
+    ListaTramaFinal.extend(Parte3)
+    ListaTramaFinal.extend(Parte4)
+    ListaTramaFinal.extend(Parte5)
+    if(DFila5[-1]!="-"):
+        ListaTramaFinal.extend(DFila5[-1])
+
+    if(len(ListaTramaFinal)>0):
+        VPosicion66.set(ListaTramaFinal[0])
+    else:
+        VPosicion66.set(N)
+    if(len(ListaTramaFinal)>1):
+        VPosicion67.set(ListaTramaFinal[1])
+    else:
+        VPosicion67.set(N)
+    if(len(ListaTramaFinal)>2):
+        VPosicion68.set(ListaTramaFinal[2])
+    else:
+        VPosicion68.set(N)
+    if(len(ListaTramaFinal)>3):
+        VPosicion69.set(ListaTramaFinal[3])
+    else:
+        VPosicion69.set(N)
+    if(len(ListaTramaFinal)>4):
+        VPosicion70.set(ListaTramaFinal[4])
+    else:
+        VPosicion70.set(N)
+    if(len(ListaTramaFinal)>5):
+        VPosicion71.set(ListaTramaFinal[5])
+    else:
+        VPosicion71.set(N)
+    if(len(ListaTramaFinal)>6):
+        VPosicion72.set(ListaTramaFinal[6])
+    else:
+        VPosicion72.set(N)
+    if(len(ListaTramaFinal)>7):
+        VPosicion73.set(ListaTramaFinal[7])
+    else:
+        VPosicion73.set(N)
+    if(len(ListaTramaFinal)>8):
+        VPosicion74.set(ListaTramaFinal[8])
+    else:
+        VPosicion74.set(N)
+    if(len(ListaTramaFinal)>9):
+        VPosicion75.set(ListaTramaFinal[9])
+    else:
+        VPosicion75.set(N)
+    if(len(ListaTramaFinal)>10):
+        VPosicion76.set(ListaTramaFinal[10])
+    else:
+        VPosicion76.set(N)
+    if(len(ListaTramaFinal)>11):
+        VPosicion77.set(ListaTramaFinal[11])
+    else:
+        VPosicion77.set(N)
+    if(len(ListaTramaFinal)>12):
+        VPosicion78.set(ListaTramaFinal[12])
+    else:
+        VPosicion78.set(N)
+    if(len(ListaTramaFinal)>13):
+        VPosicion79.set(ListaTramaFinal[13])
+    else:
+        VPosicion79.set(N)
+    if(len(ListaTramaFinal)>14):
+        VPosicion80.set(ListaTramaFinal[14])
+    else:
+        VPosicion80.set(N)
+    if(len(ListaTramaFinal)>15):
+        VPosicion81.set(ListaTramaFinal[15])
+    else:
+        VPosicion81.set(N)
+    if(len(ListaTramaFinal)>16):
+        VPosicion82.set(ListaTramaFinal[16])
+    else:
+        VPosicion82.set(N)
+    if(len(ListaTramaFinal)>17):
+        VPosicion83.set(ListaTramaFinal[17])
+    else:
+        VPosicion83.set(N)
+    if(len(ListaTramaFinal)>18):
+        VPosicion84.set(ListaTramaFinal[18])
+    else:
+        VPosicion84.set(N)
+    if(len(ListaTramaFinal)>19):
+        VPosicion85.set(ListaTramaFinal[19])
+    else:
+        VPosicion85.set(N)
+    if(len(ListaTramaFinal)>20):
+        VPosicion86.set(ListaTramaFinal[20])
+    else:
+        VPosicion86.set(N)
+    if(len(ListaTramaFinal)>21):
+        VPosicion87.set(ListaTramaFinal[21])
+    else:
+        VPosicion87.set(N)
+    if(len(ListaTramaFinal)>22):
+        VPosicion88.set(ListaTramaFinal[22])
+    else:
+        VPosicion88.set(N)
+    if(len(ListaTramaFinal)>23):
+        VPosicion89.set(ListaTramaFinal[23])
+    else:
+        VPosicion89.set(N)
+    if(len(ListaTramaFinal)>24):
+        VPosicion90.set(ListaTramaFinal[24])
+    else:
+        VPosicion90.set(N)
+    if(len(ListaTramaFinal)>25):
+        VPosicion91.set(ListaTramaFinal[25])
+    else:
+        VPosicion91.set(N)
+    if(len(ListaTramaFinal)>26):
+        VPosicion92.set(ListaTramaFinal[26])
+    else:
+        VPosicion92.set(N)
+    if(len(ListaTramaFinal)>27):
+        VPosicion93.set(ListaTramaFinal[27])
+    else:
+        VPosicion93.set(N)
+    if(len(ListaTramaFinal)>28):
+        VPosicion94.set(ListaTramaFinal[28])
+    else:
+        VPosicion94.set(N)
+    if(len(ListaTramaFinal)>29):
+        VPosicion95.set(ListaTramaFinal[29])
+    else:
+        VPosicion95.set(N)
+    
+    check1=""
+    check2=""
+    check3=""
+    check4=""
+    check5=""
+    if(len(DFila1)>0):
+        if(TramaFinal[0]!=DFila1[0]):
+            check1=1
+        else:
+            check1=0
+    if(len(DFila2)>2):
+        if(TramaFinal[1]!=DFila2[1]):
+            check2=1
+        else:
+            check2=0
+    if(len(DFila3)>4):
+        if(TramaFinal[3]!=DFila3[3]):
+            check3=1
+        else:
+            check3=0        
+    if(len(DFila4)>8):
+        if(TramaFinal[7]!=DFila4[7]):
+            check4=1
+        else:
+            check4=0
+    if(len(DFila5)>15):         
+        if(TramaFinal[15]!=DFila5[15]):
+            check5=1
+        else:
+            check5=0
+    VPosicion128.set(check1)
+    VPosicion160.set(check2)
+    VPosicion192.set(check3)
+    VPosicion224.set(check4)
+    VPosicion256.set(check5)
+
+def check():
+    check1=""
+    check2=""
+    check3=""
+    check4=""
+    check5=""
+    if(VPosicion66.get()!=VPosicion98.get()):
+        check1=1
+        VArregloPos66.configure(bg="red")
+        VArregloPos98.configure(bg="red")
+    elif(VPosicion66.get()==VPosicion98.get()):
+        check1=0
+        VArregloPos66.configure(bg="White")
+        VArregloPos98.configure(bg="White")
+    if(VPosicion67.get()!=VPosicion131.get()):
+        check2=1
+        VArregloPos67.configure(bg="red")
+        VArregloPos131.configure(bg="red")
+    elif(VPosicion67.get()==VPosicion131.get()):
+        check2=0
+        VArregloPos67.configure(bg="White")
+        VArregloPos131.configure(bg="White")
+    if(VPosicion69.get()!=VPosicion165.get()):
+        check3=1
+        VArregloPos69.configure(bg="red")
+        VArregloPos165.configure(bg="red")
+    elif(VPosicion69.get()==VPosicion165.get()):
+        check3=0
+        VArregloPos69.configure(bg="White")
+        VArregloPos165.configure(bg="White")
+    if(VPosicion73.get()!=VPosicion201.get()):
+        check4=1
+        VArregloPos73.configure(bg="red")
+        VArregloPos201.configure(bg="red")
+    elif(VPosicion73.get()==VPosicion201.get()):
+        check4=0
+        VArregloPos73.configure(bg="White")
+        VArregloPos201.configure(bg="White")
+    if(VPosicion81.get()!=VPosicion241.get()):
+        check5=1
+        VArregloPos81.configure(bg="red")
+        VArregloPos241.configure(bg="red")
+    elif(VPosicion81.get()==VPosicion241.get()):
+        check5=0
+        VArregloPos81.configure(bg="White")
+        VArregloPos241.configure(bg="White")
+    VPosicion128.set(check1)
+    VPosicion160.set(check2)
+    VPosicion192.set(check3)
+    VPosicion224.set(check4)
+    VPosicion256.set(check5)
+
+#Funcion UNRZ
+def UNRZ():
+    mensaje=TramaTotal.get()
+    Respuesta=list()
+    i=0
+    while i<len(mensaje):
+        Respuesta.append(mensaje[i])
+        i=i+1
+    TextoTramaUNRZ=("La codificacion URNZ de su trama es: ",Respuesta)
+    LabelCodificacionCanal.configure(text=TextoTramaUNRZ)
+
+#Funcion AMI
+def AMI():
+    mensaje=TramaTotal.get()
+    Respuesta=list()
+    ValAnt="-1"
+    i=0
+    while i<len(mensaje):
+        if(mensaje[i]=="0"):
+            Respuesta.append("0")
+        elif(mensaje[i]=="1"):
+            if(ValAnt=="-1"):
+                Respuesta.append("1")
+                ValAnt="1"
+            elif(ValAnt=="1"):
+                Respuesta.append("-1")
+                ValAnt="-1"            
+        i=i+1
+    TextoTramaAMI=("La codificacion URNZ de su trama es: ",Respuesta)
+    LabelCodificacionCanal.configure(text=TextoTramaAMI)
+
+#Funcion HDB3
+def HDB3():
+    mensaje=TramaTotal.get()
+    Respuesta=list()
+    i=0
+    ValAnt="1"
+    while i<len(mensaje):
+        if(mensaje[i]=="1"):
+            if(ValAnt=="1"):
+                Respuesta.append("-1")
+                ValAnt="-1"
+            elif(ValAnt=="-1"):
+                Respuesta.append("1")
+                ValAnt="1"
+        elif(mensaje[i]=="0"): 
+            Respuesta.append("0")      
+        i=i+1
+
+    cont=0
+    for pos, i in enumerate(Respuesta):
+        if i=="0":
+            cont=cont+1
+            if(cont==4):
+                if(pos+1==len(Respuesta)):
+                    Respuesta[-1]="P"
+                    cont=1
+                else:    
+                    Respuesta[pos+1]="P"
+                    cont=1
+
+    ValAnt="1"
+    inicio=TRUE
+    unos=0
+    for pos, i in enumerate(Respuesta):
+        if i=="1":
+            ValAnt="1"
+            unos=unos+1
+        elif i=="-1":
+            ValAnt="-1"
+            unos=unos+1
+        if i=="P":
+            if(inicio==True):
+                if(ValAnt=="1"):
+                    Respuesta[pos]="V"
+                elif(ValAnt=="-1"):
+                    Respuesta[pos]="-V"
+                inicio=False
+            elif(unos%2==0):
+                if(ValAnt=="1"):
+                    Respuesta[pos]="-V"
+                    Respuesta[pos-3]="-B"
+                    Respuesta[pos+1]="1"
+                elif(ValAnt=="-1"):
+                    Respuesta[pos]="V"
+                    Respuesta[pos-3]="B"
+                    Respuesta[pos+1]="-1"
+            elif(unos%2!=0):
+                if(ValAnt=="1"):
+                    Respuesta[pos]="V"
+                elif(ValAnt=="-1"):
+                    Respuesta[pos]="-V"            
+            if(cont==4):
+                Respuesta[pos+1]="P"
+                cont=0
+    TextoTramaHDB3=("La codificacion URNZ de su trama es: ",Respuesta)
+    LabelCodificacionCanal.configure(text=TextoTramaHDB3)
+
+#Creación ventana
+ventana=Tk()
+ventana.title("Codificación Hamming")
+ventana.geometry('1750x700')
+Frame1 = Frame(ventana, bg='black')
+Frame2 = Frame(ventana)
+Frame3 = Frame(ventana)
+Frame4 = Frame(ventana)
+Frame5 = Frame(ventana)
+Frame6 = Frame(ventana)
+Frame7 = Frame(ventana)
+Frame1.grid(row=0, column=0, padx=(230, 0), pady=(0, 0))
+Frame2.grid(row=1, column=0, padx=(230, 0), pady=(0, 0))
+Frame3.grid(row=2, column=0, padx=(80, 0), pady=(10, 10))
+Frame4.grid(row=3, column=0, padx=(80, 0), pady=(10, 10))
+Frame5.grid(row=4, column=0, padx=(230, 0), pady=(0, 0))
+Frame6.grid(row=5, column=0, padx=(230, 0), pady=(0, 0))
+Frame7.grid(row=6, column=0, padx=(230, 0), pady=(0, 0))
+TituloInterfaz=Label(Frame1, text="Codificación Hamming", bd=10, fg='black', font=("Helvetica", 24))
+TituloInterfaz.grid(pady=(8, 8))
+LabelInstrucciones = Label(Frame2, text="Ingrese la trama de hasta 25 bits que desea ver: ", font=("Helvetica", 16))
+LabelInstrucciones.grid(row=0, column=1, pady=(10,10))
+TramaUsuario=StringVar()
+EntryInstrucciones = Entry(Frame2, textvariable=TramaUsuario)
+EntryInstrucciones.grid(row=0, column=2)
+
+#Mostrar Matriz Inicial
+#ValoresMatrizfila1
+Posicion1=StringVar()
+ArregloPos1=Entry(Frame3,textvariable=Posicion1,width=5)
+ArregloPos1.grid(row=0,column=0,sticky=NSEW)
+Posicion2=StringVar()
+ArregloPos2=Entry(Frame3,textvariable=Posicion2,width=5)
+ArregloPos2.grid(row=0,column=1,sticky=NSEW)
+Posicion3=StringVar()
+ArregloPos3=Entry(Frame3,textvariable=Posicion3,width=5)
+ArregloPos3.grid(row=0,column=2,sticky=NSEW)
+Posicion4=StringVar()
+ArregloPos4=Entry(Frame3,textvariable=Posicion4,width=5)
+ArregloPos4.grid(row=0,column=3,sticky=NSEW)
+Posicion5=StringVar()
+ArregloPos5=Entry(Frame3,textvariable=Posicion5,width=5)
+ArregloPos5.grid(row=0,column=4,sticky=NSEW)
+Posicion6=StringVar()
+ArregloPos6=Entry(Frame3,textvariable=Posicion6,width=5)
+ArregloPos6.grid(row=0,column=5,sticky=NSEW)
+Posicion7=StringVar()
+ArregloPos7=Entry(Frame3,textvariable=Posicion7,width=5)
+ArregloPos7.grid(row=0,column=6,sticky=NSEW)
+Posicion8=StringVar()
+ArregloPos8=Entry(Frame3,textvariable=Posicion8,width=5)
+ArregloPos8.grid(row=0,column=7,sticky=NSEW)
+Posicion9=StringVar()
+ArregloPos9=Entry(Frame3,textvariable=Posicion9,width=5)
+ArregloPos9.grid(row=0,column=8,sticky=NSEW)
+Posicion10=StringVar()
+ArregloPos10=Entry(Frame3,textvariable=Posicion10,width=5)
+ArregloPos10.grid(row=0,column=9,sticky=NSEW)
+Posicion11=StringVar()
+ArregloPos11=Entry(Frame3,textvariable=Posicion11,width=5)
+ArregloPos11.grid(row=0,column=10,sticky=NSEW)
+Posicion12=StringVar()
+ArregloPos12=Entry(Frame3,textvariable=Posicion12,width=5)
+ArregloPos12.grid(row=0,column=11,sticky=NSEW)
+Posicion13=StringVar()
+ArregloPos13=Entry(Frame3,textvariable=Posicion13,width=5)
+ArregloPos13.grid(row=0,column=12,sticky=NSEW)
+Posicion14=StringVar()
+ArregloPos14=Entry(Frame3,textvariable=Posicion14,width=5)
+ArregloPos14.grid(row=0,column=13,sticky=NSEW)
+Posicion15=StringVar()
+ArregloPos15=Entry(Frame3,textvariable=Posicion15,width=5)
+ArregloPos15.grid(row=0,column=14,sticky=NSEW)
+Posicion16=StringVar()
+ArregloPos16=Entry(Frame3,textvariable=Posicion16,width=5)
+ArregloPos16.grid(row=0,column=15,sticky=NSEW)
+Posicion17=StringVar()
+ArregloPos17=Entry(Frame3,textvariable=Posicion17,width=5)
+ArregloPos17.grid(row=0,column=16,sticky=NSEW)
+Posicion18=StringVar()
+ArregloPos18=Entry(Frame3,textvariable=Posicion18,width=5)
+ArregloPos18.grid(row=0,column=17,sticky=NSEW)
+Posicion19=StringVar()
+ArregloPos19=Entry(Frame3,textvariable=Posicion19,width=5)
+ArregloPos19.grid(row=0,column=18,sticky=NSEW)
+Posicion20=StringVar()
+ArregloPos20=Entry(Frame3,textvariable=Posicion20,width=5)
+ArregloPos20.grid(row=0,column=19,sticky=NSEW)
+Posicion21=StringVar()
+ArregloPos21=Entry(Frame3,textvariable=Posicion21,width=5)
+ArregloPos21.grid(row=0,column=20,sticky=NSEW)
+Posicion22=StringVar()
+ArregloPos22=Entry(Frame3,textvariable=Posicion22,width=5)
+ArregloPos22.grid(row=0,column=21,sticky=NSEW)
+Posicion23=StringVar()
+ArregloPos23=Entry(Frame3,textvariable=Posicion23,width=5)
+ArregloPos23.grid(row=0,column=22,sticky=NSEW)
+Posicion24=StringVar()
+ArregloPos24=Entry(Frame3,textvariable=Posicion24,width=5)
+ArregloPos24.grid(row=0,column=23,sticky=NSEW)
+Posicion25=StringVar()
+ArregloPos25=Entry(Frame3,textvariable=Posicion25,width=5)
+ArregloPos25.grid(row=0,column=24,sticky=NSEW)
+Posicion26=StringVar()
+ArregloPos26=Entry(Frame3,textvariable=Posicion26,width=5)
+ArregloPos26.grid(row=0,column=25,sticky=NSEW)
+Posicion27=StringVar()
+ArregloPos27=Entry(Frame3,textvariable=Posicion27,width=5)
+ArregloPos27.grid(row=0,column=26,sticky=NSEW)
+Posicion28=StringVar()
+ArregloPos28=Entry(Frame3,textvariable=Posicion28,width=5)
+ArregloPos28.grid(row=0,column=27,sticky=NSEW)
+Posicion29=StringVar()
+ArregloPos29=Entry(Frame3,textvariable=Posicion29,width=5)
+ArregloPos29.grid(row=0,column=28,sticky=NSEW)
+Posicion30=StringVar()
+ArregloPos30=Entry(Frame3,textvariable=Posicion30,width=5)
+ArregloPos30.grid(row=0,column=29,sticky=NSEW)
+Posicion31=StringVar()
+ArregloPos31=Entry(Frame3,textvariable=Posicion31,width=5)
+ArregloPos31.grid(row=0,column=30,sticky=NSEW)
+
+Posicion2.set(1)
+Posicion3.set(2)
+Posicion4.set(3)
+Posicion5.set(4)
+Posicion6.set(5)
+Posicion7.set(6)
+Posicion8.set(7)
+Posicion9.set(8)
+Posicion10.set(9)
+Posicion11.set(10)
+Posicion12.set(11)
+Posicion13.set(12)
+Posicion14.set(13)
+Posicion15.set(14)
+Posicion16.set(15)
+Posicion17.set(16)
+Posicion18.set(17)
+Posicion19.set(18)
+Posicion20.set(19)
+Posicion21.set(20)
+Posicion22.set(21)
+Posicion23.set(22)
+Posicion24.set(23)
+Posicion25.set(24)
+Posicion26.set(25)
+Posicion27.set(26)
+Posicion28.set(27)
+Posicion29.set(28)
+Posicion30.set(29)
+Posicion31.set(30)
+
+#ArregloMatrizFila2
+Posicion33=StringVar()
+ArregloPos33=Entry(Frame3,textvariable=Posicion33,width=5)
+ArregloPos33.grid(row=1,column=0,sticky=NSEW)
+Posicion34=StringVar()
+ArregloPos34=Entry(Frame3,textvariable=Posicion34,width=5)
+ArregloPos34.grid(row=1,column=1,sticky=NSEW)
+Posicion35=StringVar()
+ArregloPos35=Entry(Frame3,textvariable=Posicion35,width=5)
+ArregloPos35.grid(row=1,column=2,sticky=NSEW)
+Posicion36=StringVar()
+ArregloPos36=Entry(Frame3,textvariable=Posicion36,width=5)
+ArregloPos36.grid(row=1,column=3,sticky=NSEW)
+Posicion37=StringVar()
+ArregloPos37=Entry(Frame3,textvariable=Posicion37,width=5)
+ArregloPos37.grid(row=1,column=4,sticky=NSEW)
+Posicion38=StringVar()
+ArregloPos38=Entry(Frame3,textvariable=Posicion38,width=5)
+ArregloPos38.grid(row=1,column=5,sticky=NSEW)
+Posicion39=StringVar()
+ArregloPos39=Entry(Frame3,textvariable=Posicion39,width=5)
+ArregloPos39.grid(row=1,column=6,sticky=NSEW)
+Posicion40=StringVar()
+ArregloPos40=Entry(Frame3,textvariable=Posicion40,width=5)
+ArregloPos40.grid(row=1,column=7,sticky=NSEW)
+Posicion41=StringVar()
+ArregloPos41=Entry(Frame3,textvariable=Posicion41,width=5)
+ArregloPos41.grid(row=1,column=8,sticky=NSEW)
+Posicion42=StringVar()
+ArregloPos42=Entry(Frame3,textvariable=Posicion42,width=5)
+ArregloPos42.grid(row=1,column=9,sticky=NSEW)
+Posicion43=StringVar()
+ArregloPos43=Entry(Frame3,textvariable=Posicion43,width=5)
+ArregloPos43.grid(row=1,column=10,sticky=NSEW)
+Posicion44=StringVar()
+ArregloPos44=Entry(Frame3,textvariable=Posicion44,width=5)
+ArregloPos44.grid(row=1,column=11,sticky=NSEW)
+Posicion45=StringVar()
+ArregloPos45=Entry(Frame3,textvariable=Posicion45,width=5)
+ArregloPos45.grid(row=1,column=12,sticky=NSEW)
+Posicion46=StringVar()
+ArregloPos46=Entry(Frame3,textvariable=Posicion46,width=5)
+ArregloPos46.grid(row=1,column=13,sticky=NSEW)
+Posicion47=StringVar()
+ArregloPos47=Entry(Frame3,textvariable=Posicion47,width=5)
+ArregloPos47.grid(row=1,column=14,sticky=NSEW)
+Posicion48=StringVar()
+ArregloPos48=Entry(Frame3,textvariable=Posicion48,width=5)
+ArregloPos48.grid(row=1,column=15,sticky=NSEW)
+Posicion49=StringVar()
+ArregloPos49=Entry(Frame3,textvariable=Posicion49,width=5)
+ArregloPos49.grid(row=1,column=16,sticky=NSEW)
+Posicion50=StringVar()
+ArregloPos50=Entry(Frame3,textvariable=Posicion50,width=5)
+ArregloPos50.grid(row=1,column=17,sticky=NSEW)
+Posicion51=StringVar()
+ArregloPos51=Entry(Frame3,textvariable=Posicion51,width=5)
+ArregloPos51.grid(row=1,column=18,sticky=NSEW)
+Posicion52=StringVar()
+ArregloPos52=Entry(Frame3,textvariable=Posicion52,width=5)
+ArregloPos52.grid(row=1,column=19,sticky=NSEW)
+Posicion53=StringVar()
+ArregloPos53=Entry(Frame3,textvariable=Posicion53,width=5)
+ArregloPos53.grid(row=1,column=20,sticky=NSEW)
+Posicion54=StringVar()
+ArregloPos54=Entry(Frame3,textvariable=Posicion54,width=5)
+ArregloPos54.grid(row=1,column=21,sticky=NSEW)
+Posicion55=StringVar()
+ArregloPos55=Entry(Frame3,textvariable=Posicion55,width=5)
+ArregloPos55.grid(row=1,column=22,sticky=NSEW)
+Posicion56=StringVar()
+ArregloPos56=Entry(Frame3,textvariable=Posicion56,width=5)
+ArregloPos56.grid(row=1,column=23,sticky=NSEW)
+Posicion57=StringVar()
+ArregloPos57=Entry(Frame3,textvariable=Posicion57,width=5)
+ArregloPos57.grid(row=1,column=24,sticky=NSEW)
+Posicion58=StringVar()
+ArregloPos58=Entry(Frame3,textvariable=Posicion58,width=5)
+ArregloPos58.grid(row=1,column=25,sticky=NSEW)
+Posicion59=StringVar()
+ArregloPos59=Entry(Frame3,textvariable=Posicion59,width=5)
+ArregloPos59.grid(row=1,column=26,sticky=NSEW)
+Posicion60=StringVar()
+ArregloPos60=Entry(Frame3,textvariable=Posicion60,width=5)
+ArregloPos60.grid(row=1,column=27,sticky=NSEW)
+Posicion61=StringVar()
+ArregloPos61=Entry(Frame3,textvariable=Posicion61,width=5)
+ArregloPos61.grid(row=1,column=28,sticky=NSEW)
+Posicion62=StringVar()
+ArregloPos62=Entry(Frame3,textvariable=Posicion62,width=5)
+ArregloPos62.grid(row=1,column=29,sticky=NSEW)
+Posicion63=StringVar()
+ArregloPos63=Entry(Frame3,textvariable=Posicion63,width=5)
+ArregloPos63.grid(row=1,column=30,sticky=NSEW)
+Posicion64=StringVar()
+
+#ArregloMatrizFila3
+Posicion65=StringVar()
+ArregloPos65=Entry(Frame3,textvariable=Posicion65,width=5)
+ArregloPos65.grid(row=2,column=0,sticky=NSEW)
+Posicion65.set("Fp1")
+Posicion66=StringVar()
+ArregloPos66=Entry(Frame3,textvariable=Posicion66,width=5)
+ArregloPos66.grid(row=2,column=1,sticky=NSEW)
+Posicion67=StringVar()
+ArregloPos67=Entry(Frame3,textvariable=Posicion67,width=5)
+ArregloPos67.grid(row=2,column=2,sticky=NSEW)
+Posicion68=StringVar()
+ArregloPos68=Entry(Frame3,textvariable=Posicion68,width=5)
+ArregloPos68.grid(row=2,column=3,sticky=NSEW)
+Posicion69=StringVar()
+ArregloPos69=Entry(Frame3,textvariable=Posicion69,width=5)
+ArregloPos69.grid(row=2,column=4,sticky=NSEW)
+Posicion70=StringVar()
+ArregloPos70=Entry(Frame3,textvariable=Posicion70,width=5)
+ArregloPos70.grid(row=2,column=5,sticky=NSEW)
+Posicion71=StringVar()
+ArregloPos71=Entry(Frame3,textvariable=Posicion71,width=5)
+ArregloPos71.grid(row=2,column=6,sticky=NSEW)
+Posicion72=StringVar()
+ArregloPos72=Entry(Frame3,textvariable=Posicion72,width=5)
+ArregloPos72.grid(row=2,column=7,sticky=NSEW)
+Posicion73=StringVar()
+ArregloPos73=Entry(Frame3,textvariable=Posicion73,width=5)
+ArregloPos73.grid(row=2,column=8,sticky=NSEW)
+Posicion74=StringVar()
+ArregloPos74=Entry(Frame3,textvariable=Posicion74,width=5)
+ArregloPos74.grid(row=2,column=9,sticky=NSEW)
+Posicion75=StringVar()
+ArregloPos75=Entry(Frame3,textvariable=Posicion75,width=5)
+ArregloPos75.grid(row=2,column=10,sticky=NSEW)
+Posicion76=StringVar()
+ArregloPos76=Entry(Frame3,textvariable=Posicion76,width=5)
+ArregloPos76.grid(row=2,column=11,sticky=NSEW)
+Posicion77=StringVar()
+ArregloPos77=Entry(Frame3,textvariable=Posicion77,width=5)
+ArregloPos77.grid(row=2,column=12,sticky=NSEW)
+Posicion78=StringVar()
+ArregloPos78=Entry(Frame3,textvariable=Posicion78,width=5)
+ArregloPos78.grid(row=2,column=13,sticky=NSEW)
+Posicion79=StringVar()
+ArregloPos79=Entry(Frame3,textvariable=Posicion79,width=5)
+ArregloPos79.grid(row=2,column=14,sticky=NSEW)
+Posicion80=StringVar()
+ArregloPos80=Entry(Frame3,textvariable=Posicion80,width=5)
+ArregloPos80.grid(row=2,column=15,sticky=NSEW)
+Posicion81=StringVar()
+ArregloPos81=Entry(Frame3,textvariable=Posicion81,width=5)
+ArregloPos81.grid(row=2,column=16,sticky=NSEW)
+Posicion82=StringVar()
+ArregloPos82=Entry(Frame3,textvariable=Posicion82,width=5)
+ArregloPos82.grid(row=2,column=17,sticky=NSEW)
+Posicion83=StringVar()
+ArregloPos83=Entry(Frame3,textvariable=Posicion83,width=5)
+ArregloPos83.grid(row=2,column=18,sticky=NSEW)
+Posicion84=StringVar()
+ArregloPos84=Entry(Frame3,textvariable=Posicion84,width=5)
+ArregloPos84.grid(row=2,column=19,sticky=NSEW)
+Posicion85=StringVar()
+ArregloPos85=Entry(Frame3,textvariable=Posicion85,width=5)
+ArregloPos85.grid(row=2,column=20,sticky=NSEW)
+Posicion86=StringVar()
+ArregloPos86=Entry(Frame3,textvariable=Posicion86,width=5)
+ArregloPos86.grid(row=2,column=21,sticky=NSEW)
+Posicion87=StringVar()
+ArregloPos87=Entry(Frame3,textvariable=Posicion87,width=5)
+ArregloPos87.grid(row=2,column=22,sticky=NSEW)
+Posicion88=StringVar()
+ArregloPos88=Entry(Frame3,textvariable=Posicion88,width=5)
+ArregloPos88.grid(row=2,column=23,sticky=NSEW)
+Posicion89=StringVar()
+ArregloPos89=Entry(Frame3,textvariable=Posicion89,width=5)
+ArregloPos89.grid(row=2,column=24,sticky=NSEW)
+Posicion90=StringVar()
+ArregloPos90=Entry(Frame3,textvariable=Posicion90,width=5)
+ArregloPos90.grid(row=2,column=25,sticky=NSEW)
+Posicion91=StringVar()
+ArregloPos91=Entry(Frame3,textvariable=Posicion91,width=5)
+ArregloPos91.grid(row=2,column=26,sticky=NSEW)
+Posicion92=StringVar()
+ArregloPos92=Entry(Frame3,textvariable=Posicion92,width=5)
+ArregloPos92.grid(row=2,column=27,sticky=NSEW)
+Posicion93=StringVar()
+ArregloPos93=Entry(Frame3,textvariable=Posicion93,width=5)
+ArregloPos93.grid(row=2,column=28,sticky=NSEW)
+Posicion94=StringVar()
+ArregloPos94=Entry(Frame3,textvariable=Posicion94,width=5)
+ArregloPos94.grid(row=2,column=29,sticky=NSEW)
+Posicion95=StringVar()
+ArregloPos95=Entry(Frame3,textvariable=Posicion95,width=5)
+ArregloPos95.grid(row=2,column=30,sticky=NSEW)
+
+#ArregloMatrizFila4
+Posicion97=StringVar()
+ArregloPos97=Entry(Frame3,textvariable=Posicion97,width=5)
+ArregloPos97.grid(row=3,column=0,sticky=NSEW)
+Posicion97.set("Fp2")
+Posicion98=StringVar()
+ArregloPos98=Entry(Frame3,textvariable=Posicion98,width=5)
+ArregloPos98.grid(row=3,column=1,sticky=NSEW)
+Posicion99=StringVar()
+ArregloPos99=Entry(Frame3,textvariable=Posicion99,width=5)
+ArregloPos99.grid(row=3,column=2,sticky=NSEW)
+Posicion100=StringVar()
+ArregloPos100=Entry(Frame3,textvariable=Posicion100,width=5)
+ArregloPos100.grid(row=3,column=3,sticky=NSEW)
+Posicion101=StringVar()
+ArregloPos101=Entry(Frame3,textvariable=Posicion101,width=5)
+ArregloPos101.grid(row=3,column=4,sticky=NSEW)
+Posicion102=StringVar()
+ArregloPos102=Entry(Frame3,textvariable=Posicion102,width=5)
+ArregloPos102.grid(row=3,column=5,sticky=NSEW)
+Posicion103=StringVar()
+ArregloPos103=Entry(Frame3,textvariable=Posicion103,width=5)
+ArregloPos103.grid(row=3,column=6,sticky=NSEW)
+Posicion104=StringVar()
+ArregloPos104=Entry(Frame3,textvariable=Posicion104,width=5)
+ArregloPos104.grid(row=3,column=7,sticky=NSEW)
+Posicion105=StringVar()
+ArregloPos105=Entry(Frame3,textvariable=Posicion105,width=5)
+ArregloPos105.grid(row=3,column=8,sticky=NSEW)
+Posicion106=StringVar()
+ArregloPos106=Entry(Frame3,textvariable=Posicion106,width=5)
+ArregloPos106.grid(row=3,column=9,sticky=NSEW)
+Posicion107=StringVar()
+ArregloPos107=Entry(Frame3,textvariable=Posicion107,width=5)
+ArregloPos107.grid(row=3,column=10,sticky=NSEW)
+Posicion108=StringVar()
+ArregloPos108=Entry(Frame3,textvariable=Posicion108,width=5)
+ArregloPos108.grid(row=3,column=11,sticky=NSEW)
+Posicion109=StringVar()
+ArregloPos109=Entry(Frame3,textvariable=Posicion109,width=5)
+ArregloPos109.grid(row=3,column=12,sticky=NSEW)
+Posicion110=StringVar()
+ArregloPos110=Entry(Frame3,textvariable=Posicion110,width=5)
+ArregloPos110.grid(row=3,column=13,sticky=NSEW)
+Posicion111=StringVar()
+ArregloPos111=Entry(Frame3,textvariable=Posicion111,width=5)
+ArregloPos111.grid(row=3,column=14,sticky=NSEW)
+Posicion112=StringVar()
+ArregloPos112=Entry(Frame3,textvariable=Posicion112,width=5)
+ArregloPos112.grid(row=3,column=15,sticky=NSEW)
+Posicion113=StringVar()
+ArregloPos113=Entry(Frame3,textvariable=Posicion113,width=5)
+ArregloPos113.grid(row=3,column=16,sticky=NSEW)
+Posicion114=StringVar()
+ArregloPos114=Entry(Frame3,textvariable=Posicion114,width=5)
+ArregloPos114.grid(row=3,column=17,sticky=NSEW)
+Posicion115=StringVar()
+ArregloPos115=Entry(Frame3,textvariable=Posicion115,width=5)
+ArregloPos115.grid(row=3,column=18,sticky=NSEW)
+Posicion116=StringVar()
+ArregloPos116=Entry(Frame3,textvariable=Posicion116,width=5)
+ArregloPos116.grid(row=3,column=19,sticky=NSEW)
+Posicion117=StringVar()
+ArregloPos117=Entry(Frame3,textvariable=Posicion117,width=5)
+ArregloPos117.grid(row=3,column=20,sticky=NSEW)
+Posicion118=StringVar()
+ArregloPos118=Entry(Frame3,textvariable=Posicion118,width=5)
+ArregloPos118.grid(row=3,column=21,sticky=NSEW)
+Posicion119=StringVar()
+ArregloPos119=Entry(Frame3,textvariable=Posicion119,width=5)
+ArregloPos119.grid(row=3,column=22,sticky=NSEW)
+Posicion120=StringVar()
+ArregloPos120=Entry(Frame3,textvariable=Posicion120,width=5)
+ArregloPos120.grid(row=3,column=23,sticky=NSEW)
+Posicion121=StringVar()
+ArregloPos121=Entry(Frame3,textvariable=Posicion121,width=5)
+ArregloPos121.grid(row=3,column=24,sticky=NSEW)
+Posicion122=StringVar()
+ArregloPos122=Entry(Frame3,textvariable=Posicion122,width=5)
+ArregloPos122.grid(row=3,column=25,sticky=NSEW)
+Posicion123=StringVar()
+ArregloPos123=Entry(Frame3,textvariable=Posicion123,width=5)
+ArregloPos123.grid(row=3,column=26,sticky=NSEW)
+Posicion124=StringVar()
+ArregloPos124=Entry(Frame3,textvariable=Posicion124,width=5)
+ArregloPos124.grid(row=3,column=27,sticky=NSEW)
+Posicion125=StringVar()
+ArregloPos125=Entry(Frame3,textvariable=Posicion125,width=5)
+ArregloPos125.grid(row=3,column=28,sticky=NSEW)
+Posicion126=StringVar()
+ArregloPos126=Entry(Frame3,textvariable=Posicion126,width=5)
+ArregloPos126.grid(row=3,column=29,sticky=NSEW)
+Posicion127=StringVar()
+ArregloPos127=Entry(Frame3,textvariable=Posicion127,width=5)
+ArregloPos127.grid(row=3,column=30,sticky=NSEW)
+
+#ArregloMatrizFila5
+Posicion129=StringVar()
+ArregloPos129=Entry(Frame3,textvariable=Posicion129,width=5)
+ArregloPos129.grid(row=4,column=0,sticky=NSEW)
+Posicion129.set("Fp4")
+Posicion130=StringVar()
+ArregloPos130=Entry(Frame3,textvariable=Posicion130,width=5)
+ArregloPos130.grid(row=4,column=1,sticky=NSEW)
+Posicion131=StringVar()
+ArregloPos131=Entry(Frame3,textvariable=Posicion131,width=5)
+ArregloPos131.grid(row=4,column=2,sticky=NSEW)
+Posicion132=StringVar()
+ArregloPos132=Entry(Frame3,textvariable=Posicion132,width=5)
+ArregloPos132.grid(row=4,column=3,sticky=NSEW)
+Posicion133=StringVar()
+ArregloPos133=Entry(Frame3,textvariable=Posicion133,width=5)
+ArregloPos133.grid(row=4,column=4,sticky=NSEW)
+Posicion134=StringVar()
+ArregloPos134=Entry(Frame3,textvariable=Posicion134,width=5)
+ArregloPos134.grid(row=4,column=5,sticky=NSEW)
+Posicion135=StringVar()
+ArregloPos135=Entry(Frame3,textvariable=Posicion135,width=5)
+ArregloPos135.grid(row=4,column=6,sticky=NSEW)
+Posicion136=StringVar()
+ArregloPos136=Entry(Frame3,textvariable=Posicion136,width=5)
+ArregloPos136.grid(row=4,column=7,sticky=NSEW)
+Posicion137=StringVar()
+ArregloPos137=Entry(Frame3,textvariable=Posicion137,width=5)
+ArregloPos137.grid(row=4,column=8,sticky=NSEW)
+Posicion138=StringVar()
+ArregloPos138=Entry(Frame3,textvariable=Posicion138,width=5)
+ArregloPos138.grid(row=4,column=9,sticky=NSEW)
+Posicion139=StringVar()
+ArregloPos139=Entry(Frame3,textvariable=Posicion139,width=5)
+ArregloPos139.grid(row=4,column=10,sticky=NSEW)
+Posicion140=StringVar()
+ArregloPos140=Entry(Frame3,textvariable=Posicion140,width=5)
+ArregloPos140.grid(row=4,column=11,sticky=NSEW)
+Posicion141=StringVar()
+ArregloPos141=Entry(Frame3,textvariable=Posicion141,width=5)
+ArregloPos141.grid(row=4,column=12,sticky=NSEW)
+Posicion142=StringVar()
+ArregloPos142=Entry(Frame3,textvariable=Posicion142,width=5)
+ArregloPos142.grid(row=4,column=13,sticky=NSEW)
+Posicion143=StringVar()
+ArregloPos143=Entry(Frame3,textvariable=Posicion143,width=5)
+ArregloPos143.grid(row=4,column=14,sticky=NSEW)
+Posicion144=StringVar()
+ArregloPos144=Entry(Frame3,textvariable=Posicion144,width=5)
+ArregloPos144.grid(row=4,column=15,sticky=NSEW)
+Posicion145=StringVar()
+ArregloPos145=Entry(Frame3,textvariable=Posicion145,width=5)
+ArregloPos145.grid(row=4,column=16,sticky=NSEW)
+Posicion146=StringVar()
+ArregloPos146=Entry(Frame3,textvariable=Posicion146,width=5)
+ArregloPos146.grid(row=4,column=17,sticky=NSEW)
+Posicion147=StringVar()
+ArregloPos147=Entry(Frame3,textvariable=Posicion147,width=5)
+ArregloPos147.grid(row=4,column=18,sticky=NSEW)
+Posicion148=StringVar()
+ArregloPos148=Entry(Frame3,textvariable=Posicion148,width=5)
+ArregloPos148.grid(row=4,column=19,sticky=NSEW)
+Posicion149=StringVar()
+ArregloPos149=Entry(Frame3,textvariable=Posicion149,width=5)
+ArregloPos149.grid(row=4,column=20,sticky=NSEW)
+Posicion150=StringVar()
+ArregloPos150=Entry(Frame3,textvariable=Posicion150,width=5)
+ArregloPos150.grid(row=4,column=21,sticky=NSEW)
+Posicion151=StringVar()
+ArregloPos151=Entry(Frame3,textvariable=Posicion151,width=5)
+ArregloPos151.grid(row=4,column=22,sticky=NSEW)
+Posicion152=StringVar()
+ArregloPos152=Entry(Frame3,textvariable=Posicion152,width=5)
+ArregloPos152.grid(row=4,column=23,sticky=NSEW)
+Posicion153=StringVar()
+ArregloPos153=Entry(Frame3,textvariable=Posicion153,width=5)
+ArregloPos153.grid(row=4,column=24,sticky=NSEW)
+Posicion154=StringVar()
+ArregloPos154=Entry(Frame3,textvariable=Posicion154,width=5)
+ArregloPos154.grid(row=4,column=25,sticky=NSEW)
+Posicion155=StringVar()
+ArregloPos155=Entry(Frame3,textvariable=Posicion155,width=5)
+ArregloPos155.grid(row=4,column=26,sticky=NSEW)
+Posicion156=StringVar()
+ArregloPos156=Entry(Frame3,textvariable=Posicion156,width=5)
+ArregloPos156.grid(row=4,column=27,sticky=NSEW)
+Posicion157=StringVar()
+ArregloPos157=Entry(Frame3,textvariable=Posicion157,width=5)
+ArregloPos157.grid(row=4,column=28,sticky=NSEW)
+Posicion158=StringVar()
+ArregloPos158=Entry(Frame3,textvariable=Posicion158,width=5)
+ArregloPos158.grid(row=4,column=29,sticky=NSEW)
+Posicion159=StringVar()
+ArregloPos159=Entry(Frame3,textvariable=Posicion159,width=5)
+ArregloPos159.grid(row=4,column=30,sticky=NSEW)
+
+#ArregloMatrizFila6
+Posicion161=StringVar()
+ArregloPos161=Entry(Frame3,textvariable=Posicion161,width=5)
+ArregloPos161.grid(row=5,column=0,sticky=NSEW)
+Posicion161.set("Fp8")
+Posicion162=StringVar()
+ArregloPos162=Entry(Frame3,textvariable=Posicion162,width=5)
+ArregloPos162.grid(row=5,column=1,sticky=NSEW)
+Posicion163=StringVar()
+ArregloPos163=Entry(Frame3,textvariable=Posicion163,width=5)
+ArregloPos163.grid(row=5,column=2,sticky=NSEW)
+Posicion164=StringVar()
+ArregloPos164=Entry(Frame3,textvariable=Posicion164,width=5)
+ArregloPos164.grid(row=5,column=3,sticky=NSEW)
+Posicion165=StringVar()
+ArregloPos165=Entry(Frame3,textvariable=Posicion165,width=5)
+ArregloPos165.grid(row=5,column=4,sticky=NSEW)
+Posicion166=StringVar()
+ArregloPos166=Entry(Frame3,textvariable=Posicion166,width=5)
+ArregloPos166.grid(row=5,column=5,sticky=NSEW)
+Posicion167=StringVar()
+ArregloPos167=Entry(Frame3,textvariable=Posicion167,width=5)
+ArregloPos167.grid(row=5,column=6,sticky=NSEW)
+Posicion168=StringVar()
+ArregloPos168=Entry(Frame3,textvariable=Posicion168,width=5)
+ArregloPos168.grid(row=5,column=7,sticky=NSEW)
+Posicion169=StringVar()
+ArregloPos169=Entry(Frame3,textvariable=Posicion169,width=5)
+ArregloPos169.grid(row=5,column=8,sticky=NSEW)
+Posicion170=StringVar()
+ArregloPos170=Entry(Frame3,textvariable=Posicion170,width=5)
+ArregloPos170.grid(row=5,column=9,sticky=NSEW)
+Posicion171=StringVar()
+ArregloPos171=Entry(Frame3,textvariable=Posicion171,width=5)
+ArregloPos171.grid(row=5,column=10,sticky=NSEW)
+Posicion172=StringVar()
+ArregloPos172=Entry(Frame3,textvariable=Posicion172,width=5)
+ArregloPos172.grid(row=5,column=11,sticky=NSEW)
+Posicion173=StringVar()
+ArregloPos173=Entry(Frame3,textvariable=Posicion173,width=5)
+ArregloPos173.grid(row=5,column=12,sticky=NSEW)
+Posicion174=StringVar()
+ArregloPos174=Entry(Frame3,textvariable=Posicion174,width=5)
+ArregloPos174.grid(row=5,column=13,sticky=NSEW)
+Posicion175=StringVar()
+ArregloPos175=Entry(Frame3,textvariable=Posicion175,width=5)
+ArregloPos175.grid(row=5,column=14,sticky=NSEW)
+Posicion176=StringVar()
+ArregloPos176=Entry(Frame3,textvariable=Posicion176,width=5)
+ArregloPos176.grid(row=5,column=15,sticky=NSEW)
+Posicion177=StringVar()
+ArregloPos177=Entry(Frame3,textvariable=Posicion177,width=5)
+ArregloPos177.grid(row=5,column=16,sticky=NSEW)
+Posicion178=StringVar()
+ArregloPos178=Entry(Frame3,textvariable=Posicion178,width=5)
+ArregloPos178.grid(row=5,column=17,sticky=NSEW)
+Posicion179=StringVar()
+ArregloPos179=Entry(Frame3,textvariable=Posicion179,width=5)
+ArregloPos179.grid(row=5,column=18,sticky=NSEW)
+Posicion180=StringVar()
+ArregloPos180=Entry(Frame3,textvariable=Posicion180,width=5)
+ArregloPos180.grid(row=5,column=19,sticky=NSEW)
+Posicion181=StringVar()
+ArregloPos181=Entry(Frame3,textvariable=Posicion181,width=5)
+ArregloPos181.grid(row=5,column=20,sticky=NSEW)
+Posicion182=StringVar()
+ArregloPos182=Entry(Frame3,textvariable=Posicion182,width=5)
+ArregloPos182.grid(row=5,column=21,sticky=NSEW)
+Posicion183=StringVar()
+ArregloPos183=Entry(Frame3,textvariable=Posicion183,width=5)
+ArregloPos183.grid(row=5,column=22,sticky=NSEW)
+Posicion184=StringVar()
+ArregloPos184=Entry(Frame3,textvariable=Posicion184,width=5)
+ArregloPos184.grid(row=5,column=23,sticky=NSEW)
+Posicion185=StringVar()
+ArregloPos185=Entry(Frame3,textvariable=Posicion185,width=5)
+ArregloPos185.grid(row=5,column=24,sticky=NSEW)
+Posicion186=StringVar()
+ArregloPos186=Entry(Frame3,textvariable=Posicion186,width=5)
+ArregloPos186.grid(row=5,column=25,sticky=NSEW)
+Posicion187=StringVar()
+ArregloPos187=Entry(Frame3,textvariable=Posicion187,width=5)
+ArregloPos187.grid(row=5,column=26,sticky=NSEW)
+Posicion188=StringVar()
+ArregloPos188=Entry(Frame3,textvariable=Posicion188,width=5)
+ArregloPos188.grid(row=5,column=27,sticky=NSEW)
+Posicion189=StringVar()
+ArregloPos189=Entry(Frame3,textvariable=Posicion189,width=5)
+ArregloPos189.grid(row=5,column=28,sticky=NSEW)
+Posicion190=StringVar()
+ArregloPos190=Entry(Frame3,textvariable=Posicion190,width=5)
+ArregloPos190.grid(row=5,column=29,sticky=NSEW)
+Posicion191=StringVar()
+ArregloPos191=Entry(Frame3,textvariable=Posicion191,width=5)
+ArregloPos191.grid(row=5,column=30,sticky=NSEW)
+
+#ArregloMatrizFila7
+Posicion193=StringVar()
+ArregloPos193=Entry(Frame3,textvariable=Posicion193,width=5)
+ArregloPos193.grid(row=6,column=0,sticky=NSEW)
+Posicion193.set("Fp16")
+Posicion194=StringVar()
+ArregloPos194=Entry(Frame3,textvariable=Posicion194,width=5)
+ArregloPos194.grid(row=6,column=1,sticky=NSEW)
+Posicion195=StringVar()
+ArregloPos195=Entry(Frame3,textvariable=Posicion195,width=5)
+ArregloPos195.grid(row=6,column=2,sticky=NSEW)
+Posicion196=StringVar()
+ArregloPos196=Entry(Frame3,textvariable=Posicion196,width=5)
+ArregloPos196.grid(row=6,column=3,sticky=NSEW)
+Posicion197=StringVar()
+ArregloPos197=Entry(Frame3,textvariable=Posicion197,width=5)
+ArregloPos197.grid(row=6,column=4,sticky=NSEW)
+Posicion198=StringVar()
+ArregloPos198=Entry(Frame3,textvariable=Posicion198,width=5)
+ArregloPos198.grid(row=6,column=5,sticky=NSEW)
+Posicion199=StringVar()
+ArregloPos199=Entry(Frame3,textvariable=Posicion199,width=5)
+ArregloPos199.grid(row=6,column=6,sticky=NSEW)
+Posicion200=StringVar()
+ArregloPos200=Entry(Frame3,textvariable=Posicion200,width=5)
+ArregloPos200.grid(row=6,column=7,sticky=NSEW)
+Posicion201=StringVar()
+ArregloPos201=Entry(Frame3,textvariable=Posicion201,width=5)
+ArregloPos201.grid(row=6,column=8,sticky=NSEW)
+Posicion202=StringVar()
+ArregloPos202=Entry(Frame3,textvariable=Posicion202,width=5)
+ArregloPos202.grid(row=6,column=9,sticky=NSEW)
+Posicion203=StringVar()
+ArregloPos203=Entry(Frame3,textvariable=Posicion203,width=5)
+ArregloPos203.grid(row=6,column=10,sticky=NSEW)
+Posicion204=StringVar()
+ArregloPos204=Entry(Frame3,textvariable=Posicion204,width=5)
+ArregloPos204.grid(row=6,column=11,sticky=NSEW)
+Posicion205=StringVar()
+ArregloPos205=Entry(Frame3,textvariable=Posicion205,width=5)
+ArregloPos205.grid(row=6,column=12,sticky=NSEW)
+Posicion206=StringVar()
+ArregloPos206=Entry(Frame3,textvariable=Posicion206,width=5)
+ArregloPos206.grid(row=6,column=13,sticky=NSEW)
+Posicion207=StringVar()
+ArregloPos207=Entry(Frame3,textvariable=Posicion207,width=5)
+ArregloPos207.grid(row=6,column=14,sticky=NSEW)
+Posicion208=StringVar()
+ArregloPos208=Entry(Frame3,textvariable=Posicion208,width=5)
+ArregloPos208.grid(row=6,column=15,sticky=NSEW)
+Posicion209=StringVar()
+ArregloPos209=Entry(Frame3,textvariable=Posicion209,width=5)
+ArregloPos209.grid(row=6,column=16,sticky=NSEW)
+Posicion210=StringVar()
+ArregloPos210=Entry(Frame3,textvariable=Posicion210,width=5)
+ArregloPos210.grid(row=6,column=17,sticky=NSEW)
+Posicion211=StringVar()
+ArregloPos211=Entry(Frame3,textvariable=Posicion211,width=5)
+ArregloPos211.grid(row=6,column=18,sticky=NSEW)
+Posicion212=StringVar()
+ArregloPos212=Entry(Frame3,textvariable=Posicion212,width=5)
+ArregloPos212.grid(row=6,column=19,sticky=NSEW)
+Posicion213=StringVar()
+ArregloPos213=Entry(Frame3,textvariable=Posicion213,width=5)
+ArregloPos213.grid(row=6,column=20,sticky=NSEW)
+Posicion214=StringVar()
+ArregloPos214=Entry(Frame3,textvariable=Posicion214,width=5)
+ArregloPos214.grid(row=6,column=21,sticky=NSEW)
+Posicion215=StringVar()
+ArregloPos215=Entry(Frame3,textvariable=Posicion215,width=5)
+ArregloPos215.grid(row=6,column=22,sticky=NSEW)
+Posicion216=StringVar()
+ArregloPos216=Entry(Frame3,textvariable=Posicion216,width=5)
+ArregloPos216.grid(row=6,column=23,sticky=NSEW)
+Posicion217=StringVar()
+ArregloPos217=Entry(Frame3,textvariable=Posicion217,width=5)
+ArregloPos217.grid(row=6,column=24,sticky=NSEW)
+Posicion218=StringVar()
+ArregloPos218=Entry(Frame3,textvariable=Posicion218,width=5)
+ArregloPos218.grid(row=6,column=25,sticky=NSEW)
+Posicion219=StringVar()
+ArregloPos219=Entry(Frame3,textvariable=Posicion219,width=5)
+ArregloPos219.grid(row=6,column=26,sticky=NSEW)
+Posicion220=StringVar()
+ArregloPos220=Entry(Frame3,textvariable=Posicion220,width=5)
+ArregloPos220.grid(row=6,column=27,sticky=NSEW)
+Posicion221=StringVar()
+ArregloPos221=Entry(Frame3,textvariable=Posicion221,width=5)
+ArregloPos221.grid(row=6,column=28,sticky=NSEW)
+Posicion222=StringVar()
+ArregloPos222=Entry(Frame3,textvariable=Posicion222,width=5)
+ArregloPos222.grid(row=6,column=29,sticky=NSEW)
+Posicion223=StringVar()
+ArregloPos223=Entry(Frame3,textvariable=Posicion223,width=5)
+ArregloPos223.grid(row=6,column=30,sticky=NSEW)
+
+#Mostrar Matriz Verficacion
+#ArregloMatrizFila1
+VPosicion1=StringVar()
+VArregloPos1=Entry(Frame4,textvariable=VPosicion1,width=5)
+VArregloPos1.grid(row=0,column=0,sticky=NSEW)
+VPosicion2=StringVar()
+VArregloPos2=Entry(Frame4,textvariable=VPosicion2,width=5)
+VArregloPos2.grid(row=0,column=1,sticky=NSEW)
+VPosicion3=StringVar()
+VArregloPos3=Entry(Frame4,textvariable=VPosicion3,width=5)
+VArregloPos3.grid(row=0,column=2,sticky=NSEW)
+VPosicion4=StringVar()
+VArregloPos4=Entry(Frame4,textvariable=VPosicion4,width=5)
+VArregloPos4.grid(row=0,column=3,sticky=NSEW)
+VPosicion5=StringVar()
+VArregloPos5=Entry(Frame4,textvariable=VPosicion5,width=5)
+VArregloPos5.grid(row=0,column=4,sticky=NSEW)
+VPosicion6=StringVar()
+VArregloPos6=Entry(Frame4,textvariable=VPosicion6,width=5)
+VArregloPos6.grid(row=0,column=5,sticky=NSEW)
+VPosicion7=StringVar()
+VArregloPos7=Entry(Frame4,textvariable=VPosicion7,width=5)
+VArregloPos7.grid(row=0,column=6,sticky=NSEW)
+VPosicion8=StringVar()
+VArregloPos8=Entry(Frame4,textvariable=VPosicion8,width=5)
+VArregloPos8.grid(row=0,column=7,sticky=NSEW)
+VPosicion9=StringVar()
+VArregloPos9=Entry(Frame4,textvariable=VPosicion9,width=5)
+VArregloPos9.grid(row=0,column=8,sticky=NSEW)
+VPosicion10=StringVar()
+VArregloPos10=Entry(Frame4,textvariable=VPosicion10,width=5)
+VArregloPos10.grid(row=0,column=9,sticky=NSEW)
+VPosicion11=StringVar()
+VArregloPos11=Entry(Frame4,textvariable=VPosicion11,width=5)
+VArregloPos11.grid(row=0,column=10,sticky=NSEW)
+VPosicion12=StringVar()
+VArregloPos12=Entry(Frame4,textvariable=VPosicion12,width=5)
+VArregloPos12.grid(row=0,column=11,sticky=NSEW)
+VPosicion13=StringVar()
+VArregloPos13=Entry(Frame4,textvariable=VPosicion13,width=5)
+VArregloPos13.grid(row=0,column=12,sticky=NSEW)
+VPosicion14=StringVar()
+VArregloPos14=Entry(Frame4,textvariable=VPosicion14,width=5)
+VArregloPos14.grid(row=0,column=13,sticky=NSEW)
+VPosicion15=StringVar()
+VArregloPos15=Entry(Frame4,textvariable=VPosicion15,width=5)
+VArregloPos15.grid(row=0,column=14,sticky=NSEW)
+VPosicion16=StringVar()
+VArregloPos16=Entry(Frame4,textvariable=VPosicion16,width=5)
+VArregloPos16.grid(row=0,column=15,sticky=NSEW)
+VPosicion17=StringVar()
+VArregloPos17=Entry(Frame4,textvariable=VPosicion17,width=5)
+VArregloPos17.grid(row=0,column=16,sticky=NSEW)
+VPosicion18=StringVar()
+VArregloPos18=Entry(Frame4,textvariable=VPosicion18,width=5)
+VArregloPos18.grid(row=0,column=17,sticky=NSEW)
+VPosicion19=StringVar()
+VArregloPos19=Entry(Frame4,textvariable=VPosicion19,width=5)
+VArregloPos19.grid(row=0,column=18,sticky=NSEW)
+VPosicion20=StringVar()
+VArregloPos20=Entry(Frame4,textvariable=VPosicion20,width=5)
+VArregloPos20.grid(row=0,column=19,sticky=NSEW)
+VPosicion21=StringVar()
+VArregloPos21=Entry(Frame4,textvariable=VPosicion21,width=5)
+VArregloPos21.grid(row=0,column=20,sticky=NSEW)
+VPosicion22=StringVar()
+VArregloPos22=Entry(Frame4,textvariable=VPosicion22,width=5)
+VArregloPos22.grid(row=0,column=21,sticky=NSEW)
+VPosicion23=StringVar()
+VArregloPos23=Entry(Frame4,textvariable=VPosicion23,width=5)
+VArregloPos23.grid(row=0,column=22,sticky=NSEW)
+VPosicion24=StringVar()
+VArregloPos24=Entry(Frame4,textvariable=VPosicion24,width=5)
+VArregloPos24.grid(row=0,column=23,sticky=NSEW)
+VPosicion25=StringVar()
+VArregloPos25=Entry(Frame4,textvariable=VPosicion25,width=5)
+VArregloPos25.grid(row=0,column=24,sticky=NSEW)
+VPosicion26=StringVar()
+VArregloPos26=Entry(Frame4,textvariable=VPosicion26,width=5)
+VArregloPos26.grid(row=0,column=25,sticky=NSEW)
+VPosicion27=StringVar()
+VArregloPos27=Entry(Frame4,textvariable=VPosicion27,width=5)
+VArregloPos27.grid(row=0,column=26,sticky=NSEW)
+VPosicion28=StringVar()
+VArregloPos28=Entry(Frame4,textvariable=VPosicion28,width=5)
+VArregloPos28.grid(row=0,column=27,sticky=NSEW)
+VPosicion29=StringVar()
+VArregloPos29=Entry(Frame4,textvariable=VPosicion29,width=5)
+VArregloPos29.grid(row=0,column=28,sticky=NSEW)
+VPosicion30=StringVar()
+VArregloPos30=Entry(Frame4,textvariable=VPosicion30,width=5)
+VArregloPos30.grid(row=0,column=29,sticky=NSEW)
+VPosicion31=StringVar()
+VArregloPos31=Entry(Frame4,textvariable=VPosicion31,width=5)
+VArregloPos31.grid(row=0,column=30,sticky=NSEW)
+VPosicion32=StringVar()
+VArregloPos32=Entry(Frame4,textvariable=VPosicion32,width=5)
+VArregloPos32.grid(row=0,column=31,sticky=NSEW)
+VPosicion2.set(1)
+VPosicion3.set(2)
+VPosicion4.set(3)
+VPosicion5.set(4)
+VPosicion6.set(5)
+VPosicion7.set(6)
+VPosicion8.set(7)
+VPosicion9.set(8)
+VPosicion10.set(9)
+VPosicion11.set(10)
+VPosicion12.set(11)
+VPosicion13.set(12)
+VPosicion14.set(13)
+VPosicion15.set(14)
+VPosicion16.set(15)
+VPosicion17.set(16)
+VPosicion18.set(17)
+VPosicion19.set(18)
+VPosicion20.set(19)
+VPosicion21.set(20)
+VPosicion22.set(21)
+VPosicion23.set(22)
+VPosicion24.set(23)
+VPosicion25.set(24)
+VPosicion26.set(25)
+VPosicion27.set(26)
+VPosicion28.set(27)
+VPosicion29.set(28)
+VPosicion30.set(29)
+VPosicion31.set(30)
+VPosicion32.set("Check")
+
+#ArregloMatrizFila2
+VPosicion33=StringVar()
+VArregloPos33=Entry(Frame4,textvariable=VPosicion33,width=5)
+VArregloPos33.grid(row=1,column=0,sticky=NSEW)
+VPosicion34=StringVar()
+VArregloPos34=Entry(Frame4,textvariable=VPosicion34,width=5)
+VArregloPos34.grid(row=1,column=1,sticky=NSEW)
+VPosicion35=StringVar()
+VArregloPos35=Entry(Frame4,textvariable=VPosicion35,width=5)
+VArregloPos35.grid(row=1,column=2,sticky=NSEW)
+VPosicion36=StringVar()
+VArregloPos36=Entry(Frame4,textvariable=VPosicion36,width=5)
+VArregloPos36.grid(row=1,column=3,sticky=NSEW)
+VPosicion37=StringVar()
+VArregloPos37=Entry(Frame4,textvariable=VPosicion37,width=5)
+VArregloPos37.grid(row=1,column=4,sticky=NSEW)
+VPosicion38=StringVar()
+VArregloPos38=Entry(Frame4,textvariable=VPosicion38,width=5)
+VArregloPos38.grid(row=1,column=5,sticky=NSEW)
+VPosicion39=StringVar()
+VArregloPos39=Entry(Frame4,textvariable=VPosicion39,width=5)
+VArregloPos39.grid(row=1,column=6,sticky=NSEW)
+VPosicion40=StringVar()
+VArregloPos40=Entry(Frame4,textvariable=VPosicion40,width=5)
+VArregloPos40.grid(row=1,column=7,sticky=NSEW)
+VPosicion41=StringVar()
+VArregloPos41=Entry(Frame4,textvariable=VPosicion41,width=5)
+VArregloPos41.grid(row=1,column=8,sticky=NSEW)
+VPosicion42=StringVar()
+VArregloPos42=Entry(Frame4,textvariable=VPosicion42,width=5)
+VArregloPos42.grid(row=1,column=9,sticky=NSEW)
+VPosicion43=StringVar()
+VArregloPos43=Entry(Frame4,textvariable=VPosicion43,width=5)
+VArregloPos43.grid(row=1,column=10,sticky=NSEW)
+VPosicion44=StringVar()
+VArregloPos44=Entry(Frame4,textvariable=VPosicion44,width=5)
+VArregloPos44.grid(row=1,column=11,sticky=NSEW)
+VPosicion45=StringVar()
+VArregloPos45=Entry(Frame4,textvariable=VPosicion45,width=5)
+VArregloPos45.grid(row=1,column=12,sticky=NSEW)
+VPosicion46=StringVar()
+VArregloPos46=Entry(Frame4,textvariable=VPosicion46,width=5)
+VArregloPos46.grid(row=1,column=13,sticky=NSEW)
+VPosicion47=StringVar()
+VArregloPos47=Entry(Frame4,textvariable=VPosicion47,width=5)
+VArregloPos47.grid(row=1,column=14,sticky=NSEW)
+VPosicion48=StringVar()
+VArregloPos48=Entry(Frame4,textvariable=VPosicion48,width=5)
+VArregloPos48.grid(row=1,column=15,sticky=NSEW)
+VPosicion49=StringVar()
+VArregloPos49=Entry(Frame4,textvariable=VPosicion49,width=5)
+VArregloPos49.grid(row=1,column=16,sticky=NSEW)
+VPosicion50=StringVar()
+VArregloPos50=Entry(Frame4,textvariable=VPosicion50,width=5)
+VArregloPos50.grid(row=1,column=17,sticky=NSEW)
+VPosicion51=StringVar()
+VArregloPos51=Entry(Frame4,textvariable=VPosicion51,width=5)
+VArregloPos51.grid(row=1,column=18,sticky=NSEW)
+VPosicion52=StringVar()
+VArregloPos52=Entry(Frame4,textvariable=VPosicion52,width=5)
+VArregloPos52.grid(row=1,column=19,sticky=NSEW)
+VPosicion53=StringVar()
+VArregloPos53=Entry(Frame4,textvariable=VPosicion53,width=5)
+VArregloPos53.grid(row=1,column=20,sticky=NSEW)
+VPosicion54=StringVar()
+VArregloPos54=Entry(Frame4,textvariable=VPosicion54,width=5)
+VArregloPos54.grid(row=1,column=21,sticky=NSEW)
+VPosicion55=StringVar()
+VArregloPos55=Entry(Frame4,textvariable=VPosicion55,width=5)
+VArregloPos55.grid(row=1,column=22,sticky=NSEW)
+VPosicion56=StringVar()
+VArregloPos56=Entry(Frame4,textvariable=VPosicion56,width=5)
+VArregloPos56.grid(row=1,column=23,sticky=NSEW)
+VPosicion57=StringVar()
+VArregloPos57=Entry(Frame4,textvariable=VPosicion57,width=5)
+VArregloPos57.grid(row=1,column=24,sticky=NSEW)
+VPosicion58=StringVar()
+VArregloPos58=Entry(Frame4,textvariable=VPosicion58,width=5)
+VArregloPos58.grid(row=1,column=25,sticky=NSEW)
+VPosicion59=StringVar()
+VArregloPos59=Entry(Frame4,textvariable=VPosicion59,width=5)
+VArregloPos59.grid(row=1,column=26,sticky=NSEW)
+VPosicion60=StringVar()
+VArregloPos60=Entry(Frame4,textvariable=VPosicion60,width=5)
+VArregloPos60.grid(row=1,column=27,sticky=NSEW)
+VPosicion61=StringVar()
+VArregloPos61=Entry(Frame4,textvariable=VPosicion61,width=5)
+VArregloPos61.grid(row=1,column=28,sticky=NSEW)
+VPosicion62=StringVar()
+VArregloPos62=Entry(Frame4,textvariable=VPosicion62,width=5)
+VArregloPos62.grid(row=1,column=29,sticky=NSEW)
+VPosicion63=StringVar()
+VArregloPos63=Entry(Frame4,textvariable=VPosicion63,width=5)
+VArregloPos63.grid(row=1,column=30,sticky=NSEW)
+VPosicion64=StringVar()
+VArregloPos64=Entry(Frame4,textvariable=VPosicion64,width=5)
+VArregloPos64.grid(row=1,column=31,sticky=NSEW)
+
+#ArregloMatrizFila3
+VPosicion65=StringVar()
+VArregloPos65=Entry(Frame4,textvariable=VPosicion65,width=5)
+VArregloPos65.grid(row=2,column=0,sticky=NSEW)
+VPosicion65.set("Trama")
+VPosicion66=StringVar()
+VArregloPos66=Entry(Frame4,textvariable=VPosicion66,width=5)
+VArregloPos66.grid(row=2,column=1,sticky=NSEW)
+VPosicion67=StringVar()
+VArregloPos67=Entry(Frame4,textvariable=VPosicion67,width=5)
+VArregloPos67.grid(row=2,column=2,sticky=NSEW)
+VPosicion68=StringVar()
+VArregloPos68=Entry(Frame4,textvariable=VPosicion68,width=5)
+VArregloPos68.grid(row=2,column=3,sticky=NSEW)
+VPosicion69=StringVar()
+VArregloPos69=Entry(Frame4,textvariable=VPosicion69,width=5)
+VArregloPos69.grid(row=2,column=4,sticky=NSEW)
+VPosicion70=StringVar()
+VArregloPos70=Entry(Frame4,textvariable=VPosicion70,width=5)
+VArregloPos70.grid(row=2,column=5,sticky=NSEW)
+VPosicion71=StringVar()
+VArregloPos71=Entry(Frame4,textvariable=VPosicion71,width=5)
+VArregloPos71.grid(row=2,column=6,sticky=NSEW)
+VPosicion72=StringVar()
+VArregloPos72=Entry(Frame4,textvariable=VPosicion72,width=5)
+VArregloPos72.grid(row=2,column=7,sticky=NSEW)
+VPosicion73=StringVar()
+VArregloPos73=Entry(Frame4,textvariable=VPosicion73,width=5)
+VArregloPos73.grid(row=2,column=8,sticky=NSEW)
+VPosicion74=StringVar()
+VArregloPos74=Entry(Frame4,textvariable=VPosicion74,width=5)
+VArregloPos74.grid(row=2,column=9,sticky=NSEW)
+VPosicion75=StringVar()
+VArregloPos75=Entry(Frame4,textvariable=VPosicion75,width=5)
+VArregloPos75.grid(row=2,column=10,sticky=NSEW)
+VPosicion76=StringVar()
+VArregloPos76=Entry(Frame4,textvariable=VPosicion76,width=5)
+VArregloPos76.grid(row=2,column=11,sticky=NSEW)
+VPosicion77=StringVar()
+VArregloPos77=Entry(Frame4,textvariable=VPosicion77,width=5)
+VArregloPos77.grid(row=2,column=12,sticky=NSEW)
+VPosicion78=StringVar()
+VArregloPos78=Entry(Frame4,textvariable=VPosicion78,width=5)
+VArregloPos78.grid(row=2,column=13,sticky=NSEW)
+VPosicion79=StringVar()
+VArregloPos79=Entry(Frame4,textvariable=VPosicion79,width=5)
+VArregloPos79.grid(row=2,column=14,sticky=NSEW)
+VPosicion80=StringVar()
+VArregloPos80=Entry(Frame4,textvariable=VPosicion80,width=5)
+VArregloPos80.grid(row=2,column=15,sticky=NSEW)
+VPosicion81=StringVar()
+VArregloPos81=Entry(Frame4,textvariable=VPosicion81,width=5)
+VArregloPos81.grid(row=2,column=16,sticky=NSEW)
+VPosicion82=StringVar()
+VArregloPos82=Entry(Frame4,textvariable=VPosicion82,width=5)
+VArregloPos82.grid(row=2,column=17,sticky=NSEW)
+VPosicion83=StringVar()
+VArregloPos83=Entry(Frame4,textvariable=VPosicion83,width=5)
+VArregloPos83.grid(row=2,column=18,sticky=NSEW)
+VPosicion84=StringVar()
+VArregloPos84=Entry(Frame4,textvariable=VPosicion84,width=5)
+VArregloPos84.grid(row=2,column=19,sticky=NSEW)
+VPosicion85=StringVar()
+VArregloPos85=Entry(Frame4,textvariable=VPosicion85,width=5)
+VArregloPos85.grid(row=2,column=20,sticky=NSEW)
+VPosicion86=StringVar()
+VArregloPos86=Entry(Frame4,textvariable=VPosicion86,width=5)
+VArregloPos86.grid(row=2,column=21,sticky=NSEW)
+VPosicion87=StringVar()
+VArregloPos87=Entry(Frame4,textvariable=VPosicion87,width=5)
+VArregloPos87.grid(row=2,column=22,sticky=NSEW)
+VPosicion88=StringVar()
+VArregloPos88=Entry(Frame4,textvariable=VPosicion88,width=5)
+VArregloPos88.grid(row=2,column=23,sticky=NSEW)
+VPosicion89=StringVar()
+VArregloPos89=Entry(Frame4,textvariable=VPosicion89,width=5)
+VArregloPos89.grid(row=2,column=24,sticky=NSEW)
+VPosicion90=StringVar()
+VArregloPos90=Entry(Frame4,textvariable=VPosicion90,width=5)
+VArregloPos90.grid(row=2,column=25,sticky=NSEW)
+VPosicion91=StringVar()
+VArregloPos91=Entry(Frame4,textvariable=VPosicion91,width=5)
+VArregloPos91.grid(row=2,column=26,sticky=NSEW)
+VPosicion92=StringVar()
+VArregloPos92=Entry(Frame4,textvariable=VPosicion92,width=5)
+VArregloPos92.grid(row=2,column=27,sticky=NSEW)
+VPosicion93=StringVar()
+VArregloPos93=Entry(Frame4,textvariable=VPosicion93,width=5)
+VArregloPos93.grid(row=2,column=28,sticky=NSEW)
+VPosicion94=StringVar()
+VArregloPos94=Entry(Frame4,textvariable=VPosicion94,width=5)
+VArregloPos94.grid(row=2,column=29,sticky=NSEW)
+VPosicion95=StringVar()
+VArregloPos95=Entry(Frame4,textvariable=VPosicion95,width=5)
+VArregloPos95.grid(row=2,column=30,sticky=NSEW)
+VPosicion96=StringVar()
+VArregloPos96=Entry(Frame4,textvariable=VPosicion96,width=5)
+VArregloPos96.grid(row=2,column=31,sticky=NSEW)
+
+#ArregloMatrizFila4
+VPosicion97=StringVar()
+VArregloPos97=Entry(Frame4,textvariable=VPosicion97,width=5)
+VArregloPos97.grid(row=3,column=0,sticky=NSEW)
+VPosicion97.set("Fp1")
+VPosicion98=StringVar()
+VArregloPos98=Entry(Frame4,textvariable=VPosicion98,width=5)
+VArregloPos98.grid(row=3,column=1,sticky=NSEW)
+VPosicion99=StringVar()
+VArregloPos99=Entry(Frame4,textvariable=VPosicion99,width=5)
+VArregloPos99.grid(row=3,column=2,sticky=NSEW)
+VPosicion100=StringVar()
+VArregloPos100=Entry(Frame4,textvariable=VPosicion100,width=5)
+VArregloPos100.grid(row=3,column=3,sticky=NSEW)
+VPosicion101=StringVar()
+VArregloPos101=Entry(Frame4,textvariable=VPosicion101,width=5)
+VArregloPos101.grid(row=3,column=4,sticky=NSEW)
+VPosicion102=StringVar()
+VArregloPos102=Entry(Frame4,textvariable=VPosicion102,width=5)
+VArregloPos102.grid(row=3,column=5,sticky=NSEW)
+VPosicion103=StringVar()
+VArregloPos103=Entry(Frame4,textvariable=VPosicion103,width=5)
+VArregloPos103.grid(row=3,column=6,sticky=NSEW)
+VPosicion104=StringVar()
+VArregloPos104=Entry(Frame4,textvariable=VPosicion104,width=5)
+VArregloPos104.grid(row=3,column=7,sticky=NSEW)
+VPosicion105=StringVar()
+VArregloPos105=Entry(Frame4,textvariable=VPosicion105,width=5)
+VArregloPos105.grid(row=3,column=8,sticky=NSEW)
+VPosicion106=StringVar()
+VArregloPos106=Entry(Frame4,textvariable=VPosicion106,width=5)
+VArregloPos106.grid(row=3,column=9,sticky=NSEW)
+VPosicion107=StringVar()
+VArregloPos107=Entry(Frame4,textvariable=VPosicion107,width=5)
+VArregloPos107.grid(row=3,column=10,sticky=NSEW)
+VPosicion108=StringVar()
+VArregloPos108=Entry(Frame4,textvariable=VPosicion108,width=5)
+VArregloPos108.grid(row=3,column=11,sticky=NSEW)
+VPosicion109=StringVar()
+VArregloPos109=Entry(Frame4,textvariable=VPosicion109,width=5)
+VArregloPos109.grid(row=3,column=12,sticky=NSEW)
+VPosicion110=StringVar()
+VArregloPos110=Entry(Frame4,textvariable=VPosicion110,width=5)
+VArregloPos110.grid(row=3,column=13,sticky=NSEW)
+VPosicion111=StringVar()
+VArregloPos111=Entry(Frame4,textvariable=VPosicion111,width=5)
+VArregloPos111.grid(row=3,column=14,sticky=NSEW)
+VPosicion112=StringVar()
+VArregloPos112=Entry(Frame4,textvariable=VPosicion112,width=5)
+VArregloPos112.grid(row=3,column=15,sticky=NSEW)
+VPosicion113=StringVar()
+VArregloPos113=Entry(Frame4,textvariable=VPosicion113,width=5)
+VArregloPos113.grid(row=3,column=16,sticky=NSEW)
+VPosicion114=StringVar()
+VArregloPos114=Entry(Frame4,textvariable=VPosicion114,width=5)
+VArregloPos114.grid(row=3,column=17,sticky=NSEW)
+VPosicion115=StringVar()
+VArregloPos115=Entry(Frame4,textvariable=VPosicion115,width=5)
+VArregloPos115.grid(row=3,column=18,sticky=NSEW)
+VPosicion116=StringVar()
+VArregloPos116=Entry(Frame4,textvariable=VPosicion116,width=5)
+VArregloPos116.grid(row=3,column=19,sticky=NSEW)
+VPosicion117=StringVar()
+VArregloPos117=Entry(Frame4,textvariable=VPosicion117,width=5)
+VArregloPos117.grid(row=3,column=20,sticky=NSEW)
+VPosicion118=StringVar()
+VArregloPos118=Entry(Frame4,textvariable=VPosicion118,width=5)
+VArregloPos118.grid(row=3,column=21,sticky=NSEW)
+VPosicion119=StringVar()
+VArregloPos119=Entry(Frame4,textvariable=VPosicion119,width=5)
+VArregloPos119.grid(row=3,column=22,sticky=NSEW)
+VPosicion120=StringVar()
+VArregloPos120=Entry(Frame4,textvariable=VPosicion120,width=5)
+VArregloPos120.grid(row=3,column=23,sticky=NSEW)
+VPosicion121=StringVar()
+VArregloPos121=Entry(Frame4,textvariable=VPosicion121,width=5)
+VArregloPos121.grid(row=3,column=24,sticky=NSEW)
+VPosicion122=StringVar()
+VArregloPos122=Entry(Frame4,textvariable=VPosicion122,width=5)
+VArregloPos122.grid(row=3,column=25,sticky=NSEW)
+VPosicion123=StringVar()
+VArregloPos123=Entry(Frame4,textvariable=VPosicion123,width=5)
+VArregloPos123.grid(row=3,column=26,sticky=NSEW)
+VPosicion124=StringVar()
+VArregloPos124=Entry(Frame4,textvariable=VPosicion124,width=5)
+VArregloPos124.grid(row=3,column=27,sticky=NSEW)
+VPosicion125=StringVar()
+VArregloPos125=Entry(Frame4,textvariable=VPosicion125,width=5)
+VArregloPos125.grid(row=3,column=28,sticky=NSEW)
+VPosicion126=StringVar()
+VArregloPos126=Entry(Frame4,textvariable=VPosicion126,width=5)
+VArregloPos126.grid(row=3,column=29,sticky=NSEW)
+VPosicion127=StringVar()
+VArregloPos127=Entry(Frame4,textvariable=VPosicion127,width=5)
+VArregloPos127.grid(row=3,column=30,sticky=NSEW)
+VPosicion128=StringVar()
+VArregloPos128=Entry(Frame4,textvariable=VPosicion128,width=5)
+VArregloPos128.grid(row=3,column=31,sticky=NSEW)
+
+#ArregloMatrizFila5
+VPosicion129=StringVar()
+VArregloPos129=Entry(Frame4,textvariable=VPosicion129,width=5)
+VArregloPos129.grid(row=4,column=0,sticky=NSEW)
+VPosicion129.set("Fp2")
+VPosicion130=StringVar()
+VArregloPos130=Entry(Frame4,textvariable=VPosicion130,width=5)
+VArregloPos130.grid(row=4,column=1,sticky=NSEW)
+VPosicion131=StringVar()
+VArregloPos131=Entry(Frame4,textvariable=VPosicion131,width=5)
+VArregloPos131.grid(row=4,column=2,sticky=NSEW)
+VPosicion132=StringVar()
+VArregloPos132=Entry(Frame4,textvariable=VPosicion132,width=5)
+VArregloPos132.grid(row=4,column=3,sticky=NSEW)
+VPosicion133=StringVar()
+VArregloPos133=Entry(Frame4,textvariable=VPosicion133,width=5)
+VArregloPos133.grid(row=4,column=4,sticky=NSEW)
+VPosicion134=StringVar()
+VArregloPos134=Entry(Frame4,textvariable=VPosicion134,width=5)
+VArregloPos134.grid(row=4,column=5,sticky=NSEW)
+VPosicion135=StringVar()
+VArregloPos135=Entry(Frame4,textvariable=VPosicion135,width=5)
+VArregloPos135.grid(row=4,column=6,sticky=NSEW)
+VPosicion136=StringVar()
+VArregloPos136=Entry(Frame4,textvariable=VPosicion136,width=5)
+VArregloPos136.grid(row=4,column=7,sticky=NSEW)
+VPosicion137=StringVar()
+VArregloPos137=Entry(Frame4,textvariable=VPosicion137,width=5)
+VArregloPos137.grid(row=4,column=8,sticky=NSEW)
+VPosicion138=StringVar()
+VArregloPos138=Entry(Frame4,textvariable=VPosicion138,width=5)
+VArregloPos138.grid(row=4,column=9,sticky=NSEW)
+VPosicion139=StringVar()
+VArregloPos139=Entry(Frame4,textvariable=VPosicion139,width=5)
+VArregloPos139.grid(row=4,column=10,sticky=NSEW)
+VPosicion140=StringVar()
+VArregloPos140=Entry(Frame4,textvariable=VPosicion140,width=5)
+VArregloPos140.grid(row=4,column=11,sticky=NSEW)
+VPosicion141=StringVar()
+VArregloPos141=Entry(Frame4,textvariable=VPosicion141,width=5)
+VArregloPos141.grid(row=4,column=12,sticky=NSEW)
+VPosicion142=StringVar()
+VArregloPos142=Entry(Frame4,textvariable=VPosicion142,width=5)
+VArregloPos142.grid(row=4,column=13,sticky=NSEW)
+VPosicion143=StringVar()
+VArregloPos143=Entry(Frame4,textvariable=VPosicion143,width=5)
+VArregloPos143.grid(row=4,column=14,sticky=NSEW)
+VPosicion144=StringVar()
+VArregloPos144=Entry(Frame4,textvariable=VPosicion144,width=5)
+VArregloPos144.grid(row=4,column=15,sticky=NSEW)
+VPosicion145=StringVar()
+VArregloPos145=Entry(Frame4,textvariable=VPosicion145,width=5)
+VArregloPos145.grid(row=4,column=16,sticky=NSEW)
+VPosicion146=StringVar()
+VArregloPos146=Entry(Frame4,textvariable=VPosicion146,width=5)
+VArregloPos146.grid(row=4,column=17,sticky=NSEW)
+VPosicion147=StringVar()
+VArregloPos147=Entry(Frame4,textvariable=VPosicion147,width=5)
+VArregloPos147.grid(row=4,column=18,sticky=NSEW)
+VPosicion148=StringVar()
+VArregloPos148=Entry(Frame4,textvariable=VPosicion148,width=5)
+VArregloPos148.grid(row=4,column=19,sticky=NSEW)
+VPosicion149=StringVar()
+VArregloPos149=Entry(Frame4,textvariable=VPosicion149,width=5)
+VArregloPos149.grid(row=4,column=20,sticky=NSEW)
+VPosicion150=StringVar()
+VArregloPos150=Entry(Frame4,textvariable=VPosicion150,width=5)
+VArregloPos150.grid(row=4,column=21,sticky=NSEW)
+VPosicion151=StringVar()
+VArregloPos151=Entry(Frame4,textvariable=VPosicion151,width=5)
+VArregloPos151.grid(row=4,column=22,sticky=NSEW)
+VPosicion152=StringVar()
+VArregloPos152=Entry(Frame4,textvariable=VPosicion152,width=5)
+VArregloPos152.grid(row=4,column=23,sticky=NSEW)
+VPosicion153=StringVar()
+VArregloPos153=Entry(Frame4,textvariable=VPosicion153,width=5)
+VArregloPos153.grid(row=4,column=24,sticky=NSEW)
+VPosicion154=StringVar()
+VArregloPos154=Entry(Frame4,textvariable=VPosicion154,width=5)
+VArregloPos154.grid(row=4,column=25,sticky=NSEW)
+VPosicion155=StringVar()
+VArregloPos155=Entry(Frame4,textvariable=VPosicion155,width=5)
+VArregloPos155.grid(row=4,column=26,sticky=NSEW)
+VPosicion156=StringVar()
+VArregloPos156=Entry(Frame4,textvariable=VPosicion156,width=5)
+VArregloPos156.grid(row=4,column=27,sticky=NSEW)
+VPosicion157=StringVar()
+VArregloPos157=Entry(Frame4,textvariable=VPosicion157,width=5)
+VArregloPos157.grid(row=4,column=28,sticky=NSEW)
+VPosicion158=StringVar()
+VArregloPos158=Entry(Frame4,textvariable=VPosicion158,width=5)
+VArregloPos158.grid(row=4,column=29,sticky=NSEW)
+VPosicion159=StringVar()
+VArregloPos159=Entry(Frame4,textvariable=VPosicion159,width=5)
+VArregloPos159.grid(row=4,column=30,sticky=NSEW)
+VPosicion160=StringVar()
+VArregloPos160=Entry(Frame4,textvariable=VPosicion160,width=5)
+VArregloPos160.grid(row=4,column=31,sticky=NSEW)
+
+#ArregloMatrizFila6
+VPosicion161=StringVar()
+VArregloPos161=Entry(Frame4,textvariable=VPosicion161,width=5)
+VArregloPos161.grid(row=5,column=0,sticky=NSEW)
+VPosicion161.set("Fp4")
+VPosicion162=StringVar()
+VArregloPos162=Entry(Frame4,textvariable=VPosicion162,width=5)
+VArregloPos162.grid(row=5,column=1,sticky=NSEW)
+VPosicion163=StringVar()
+VArregloPos163=Entry(Frame4,textvariable=VPosicion163,width=5)
+VArregloPos163.grid(row=5,column=2,sticky=NSEW)
+VPosicion164=StringVar()
+VArregloPos164=Entry(Frame4,textvariable=VPosicion164,width=5)
+VArregloPos164.grid(row=5,column=3,sticky=NSEW)
+VPosicion165=StringVar()
+VArregloPos165=Entry(Frame4,textvariable=VPosicion165,width=5)
+VArregloPos165.grid(row=5,column=4,sticky=NSEW)
+VPosicion166=StringVar()
+VArregloPos166=Entry(Frame4,textvariable=VPosicion166,width=5)
+VArregloPos166.grid(row=5,column=5,sticky=NSEW)
+VPosicion167=StringVar()
+VArregloPos167=Entry(Frame4,textvariable=VPosicion167,width=5)
+VArregloPos167.grid(row=5,column=6,sticky=NSEW)
+VPosicion168=StringVar()
+VArregloPos168=Entry(Frame4,textvariable=VPosicion168,width=5)
+VArregloPos168.grid(row=5,column=7,sticky=NSEW)
+VPosicion169=StringVar()
+VArregloPos169=Entry(Frame4,textvariable=VPosicion169,width=5)
+VArregloPos169.grid(row=5,column=8,sticky=NSEW)
+VPosicion170=StringVar()
+VArregloPos170=Entry(Frame4,textvariable=VPosicion170,width=5)
+VArregloPos170.grid(row=5,column=9,sticky=NSEW)
+VPosicion171=StringVar()
+VArregloPos171=Entry(Frame4,textvariable=VPosicion171,width=5)
+VArregloPos171.grid(row=5,column=10,sticky=NSEW)
+VPosicion172=StringVar()
+VArregloPos172=Entry(Frame4,textvariable=VPosicion172,width=5)
+VArregloPos172.grid(row=5,column=11,sticky=NSEW)
+VPosicion173=StringVar()
+VArregloPos173=Entry(Frame4,textvariable=VPosicion173,width=5)
+VArregloPos173.grid(row=5,column=12,sticky=NSEW)
+VPosicion174=StringVar()
+VArregloPos174=Entry(Frame4,textvariable=VPosicion174,width=5)
+VArregloPos174.grid(row=5,column=13,sticky=NSEW)
+VPosicion175=StringVar()
+VArregloPos175=Entry(Frame4,textvariable=VPosicion175,width=5)
+VArregloPos175.grid(row=5,column=14,sticky=NSEW)
+VPosicion176=StringVar()
+VArregloPos176=Entry(Frame4,textvariable=VPosicion176,width=5)
+VArregloPos176.grid(row=5,column=15,sticky=NSEW)
+VPosicion177=StringVar()
+VArregloPos177=Entry(Frame4,textvariable=VPosicion177,width=5)
+VArregloPos177.grid(row=5,column=16,sticky=NSEW)
+VPosicion178=StringVar()
+VArregloPos178=Entry(Frame4,textvariable=VPosicion178,width=5)
+VArregloPos178.grid(row=5,column=17,sticky=NSEW)
+VPosicion179=StringVar()
+VArregloPos179=Entry(Frame4,textvariable=VPosicion179,width=5)
+VArregloPos179.grid(row=5,column=18,sticky=NSEW)
+VPosicion180=StringVar()
+VArregloPos180=Entry(Frame4,textvariable=VPosicion180,width=5)
+VArregloPos180.grid(row=5,column=19,sticky=NSEW)
+VPosicion181=StringVar()
+VArregloPos181=Entry(Frame4,textvariable=VPosicion181,width=5)
+VArregloPos181.grid(row=5,column=20,sticky=NSEW)
+VPosicion182=StringVar()
+VArregloPos182=Entry(Frame4,textvariable=VPosicion182,width=5)
+VArregloPos182.grid(row=5,column=21,sticky=NSEW)
+VPosicion183=StringVar()
+VArregloPos183=Entry(Frame4,textvariable=VPosicion183,width=5)
+VArregloPos183.grid(row=5,column=22,sticky=NSEW)
+VPosicion184=StringVar()
+VArregloPos184=Entry(Frame4,textvariable=VPosicion184,width=5)
+VArregloPos184.grid(row=5,column=23,sticky=NSEW)
+VPosicion185=StringVar()
+VArregloPos185=Entry(Frame4,textvariable=VPosicion185,width=5)
+VArregloPos185.grid(row=5,column=24,sticky=NSEW)
+VPosicion186=StringVar()
+VArregloPos186=Entry(Frame4,textvariable=VPosicion186,width=5)
+VArregloPos186.grid(row=5,column=25,sticky=NSEW)
+VPosicion187=StringVar()
+VArregloPos187=Entry(Frame4,textvariable=VPosicion187,width=5)
+VArregloPos187.grid(row=5,column=26,sticky=NSEW)
+VPosicion188=StringVar()
+VArregloPos188=Entry(Frame4,textvariable=VPosicion188,width=5)
+VArregloPos188.grid(row=5,column=27,sticky=NSEW)
+VPosicion189=StringVar()
+VArregloPos189=Entry(Frame4,textvariable=VPosicion189,width=5)
+VArregloPos189.grid(row=5,column=28,sticky=NSEW)
+VPosicion190=StringVar()
+VArregloPos190=Entry(Frame4,textvariable=VPosicion190,width=5)
+VArregloPos190.grid(row=5,column=29,sticky=NSEW)
+VPosicion191=StringVar()
+VArregloPos191=Entry(Frame4,textvariable=VPosicion191,width=5)
+VArregloPos191.grid(row=5,column=30,sticky=NSEW)
+VPosicion192=StringVar()
+VArregloPos192=Entry(Frame4,textvariable=VPosicion192,width=5)
+VArregloPos192.grid(row=5,column=31,sticky=NSEW)
+
+#ArregloMatrizFila7
+VPosicion193=StringVar()
+VArregloPos193=Entry(Frame4,textvariable=VPosicion193,width=5)
+VArregloPos193.grid(row=6,column=0,sticky=NSEW)
+VPosicion193.set("Fp8")
+VPosicion194=StringVar()
+VArregloPos194=Entry(Frame4,textvariable=VPosicion194,width=5)
+VArregloPos194.grid(row=6,column=1,sticky=NSEW)
+VPosicion195=StringVar()
+VArregloPos195=Entry(Frame4,textvariable=VPosicion195,width=5)
+VArregloPos195.grid(row=6,column=2,sticky=NSEW)
+VPosicion196=StringVar()
+VArregloPos196=Entry(Frame4,textvariable=VPosicion196,width=5)
+VArregloPos196.grid(row=6,column=3,sticky=NSEW)
+VPosicion197=StringVar()
+VArregloPos197=Entry(Frame4,textvariable=VPosicion197,width=5)
+VArregloPos197.grid(row=6,column=4,sticky=NSEW)
+VPosicion198=StringVar()
+VArregloPos198=Entry(Frame4,textvariable=VPosicion198,width=5)
+VArregloPos198.grid(row=6,column=5,sticky=NSEW)
+VPosicion199=StringVar()
+VArregloPos199=Entry(Frame4,textvariable=VPosicion199,width=5)
+VArregloPos199.grid(row=6,column=6,sticky=NSEW)
+VPosicion200=StringVar()
+VArregloPos200=Entry(Frame4,textvariable=VPosicion200,width=5)
+VArregloPos200.grid(row=6,column=7,sticky=NSEW)
+VPosicion201=StringVar()
+VArregloPos201=Entry(Frame4,textvariable=VPosicion201,width=5)
+VArregloPos201.grid(row=6,column=8,sticky=NSEW)
+VPosicion202=StringVar()
+VArregloPos202=Entry(Frame4,textvariable=VPosicion202,width=5)
+VArregloPos202.grid(row=6,column=9,sticky=NSEW)
+VPosicion203=StringVar()
+VArregloPos203=Entry(Frame4,textvariable=VPosicion203,width=5)
+VArregloPos203.grid(row=6,column=10,sticky=NSEW)
+VPosicion204=StringVar()
+VArregloPos204=Entry(Frame4,textvariable=VPosicion204,width=5)
+VArregloPos204.grid(row=6,column=11,sticky=NSEW)
+VPosicion205=StringVar()
+VArregloPos205=Entry(Frame4,textvariable=VPosicion205,width=5)
+VArregloPos205.grid(row=6,column=12,sticky=NSEW)
+VPosicion206=StringVar()
+VArregloPos206=Entry(Frame4,textvariable=VPosicion206,width=5)
+VArregloPos206.grid(row=6,column=13,sticky=NSEW)
+VPosicion207=StringVar()
+VArregloPos207=Entry(Frame4,textvariable=VPosicion207,width=5)
+VArregloPos207.grid(row=6,column=14,sticky=NSEW)
+VPosicion208=StringVar()
+VArregloPos208=Entry(Frame4,textvariable=VPosicion208,width=5)
+VArregloPos208.grid(row=6,column=15,sticky=NSEW)
+VPosicion209=StringVar()
+VArregloPos209=Entry(Frame4,textvariable=VPosicion209,width=5)
+VArregloPos209.grid(row=6,column=16,sticky=NSEW)
+VPosicion210=StringVar()
+VArregloPos210=Entry(Frame4,textvariable=VPosicion210,width=5)
+VArregloPos210.grid(row=6,column=17,sticky=NSEW)
+VPosicion211=StringVar()
+VArregloPos211=Entry(Frame4,textvariable=VPosicion211,width=5)
+VArregloPos211.grid(row=6,column=18,sticky=NSEW)
+VPosicion212=StringVar()
+VArregloPos212=Entry(Frame4,textvariable=VPosicion212,width=5)
+VArregloPos212.grid(row=6,column=19,sticky=NSEW)
+VPosicion213=StringVar()
+VArregloPos213=Entry(Frame4,textvariable=VPosicion213,width=5)
+VArregloPos213.grid(row=6,column=20,sticky=NSEW)
+VPosicion214=StringVar()
+VArregloPos214=Entry(Frame4,textvariable=VPosicion214,width=5)
+VArregloPos214.grid(row=6,column=21,sticky=NSEW)
+VPosicion215=StringVar()
+VArregloPos215=Entry(Frame4,textvariable=VPosicion215,width=5)
+VArregloPos215.grid(row=6,column=22,sticky=NSEW)
+VPosicion216=StringVar()
+VArregloPos216=Entry(Frame4,textvariable=VPosicion216,width=5)
+VArregloPos216.grid(row=6,column=23,sticky=NSEW)
+VPosicion217=StringVar()
+VArregloPos217=Entry(Frame4,textvariable=VPosicion217,width=5)
+VArregloPos217.grid(row=6,column=24,sticky=NSEW)
+VPosicion218=StringVar()
+VArregloPos218=Entry(Frame4,textvariable=VPosicion218,width=5)
+VArregloPos218.grid(row=6,column=25,sticky=NSEW)
+VPosicion219=StringVar()
+VArregloPos219=Entry(Frame4,textvariable=VPosicion219,width=5)
+VArregloPos219.grid(row=6,column=26,sticky=NSEW)
+VPosicion220=StringVar()
+VArregloPos220=Entry(Frame4,textvariable=VPosicion220,width=5)
+VArregloPos220.grid(row=6,column=27,sticky=NSEW)
+VPosicion221=StringVar()
+VArregloPos221=Entry(Frame4,textvariable=VPosicion221,width=5)
+VArregloPos221.grid(row=6,column=28,sticky=NSEW)
+VPosicion222=StringVar()
+VArregloPos222=Entry(Frame4,textvariable=VPosicion222,width=5)
+VArregloPos222.grid(row=6,column=29,sticky=NSEW)
+VPosicion223=StringVar()
+VArregloPos223=Entry(Frame4,textvariable=VPosicion223,width=5)
+VArregloPos223.grid(row=6,column=30,sticky=NSEW)
+VPosicion224=StringVar()
+VArregloPos224=Entry(Frame4,textvariable=VPosicion224,width=5)
+VArregloPos224.grid(row=6,column=31,sticky=NSEW)
+
+#ArregloMatrizFila8
+VPosicion225=StringVar()
+VArregloPos225=Entry(Frame4,textvariable=VPosicion225,width=5)
+VArregloPos225.grid(row=7,column=0,sticky=NSEW)
+VPosicion225.set("Fp16")
+VPosicion226=StringVar()
+VArregloPos226=Entry(Frame4,textvariable=VPosicion226,width=5)
+VArregloPos226.grid(row=7,column=1,sticky=NSEW)
+VPosicion227=StringVar()
+VArregloPos227=Entry(Frame4,textvariable=VPosicion227,width=5)
+VArregloPos227.grid(row=7,column=2,sticky=NSEW)
+VPosicion228=StringVar()
+VArregloPos228=Entry(Frame4,textvariable=VPosicion228,width=5)
+VArregloPos228.grid(row=7,column=3,sticky=NSEW)
+VPosicion229=StringVar()
+VArregloPos229=Entry(Frame4,textvariable=VPosicion229,width=5)
+VArregloPos229.grid(row=7,column=4,sticky=NSEW)
+VPosicion230=StringVar()
+VArregloPos230=Entry(Frame4,textvariable=VPosicion230,width=5)
+VArregloPos230.grid(row=7,column=5,sticky=NSEW)
+VPosicion231=StringVar()
+VArregloPos231=Entry(Frame4,textvariable=VPosicion231,width=5)
+VArregloPos231.grid(row=7,column=6,sticky=NSEW)
+VPosicion232=StringVar()
+VArregloPos232=Entry(Frame4,textvariable=VPosicion232,width=5)
+VArregloPos232.grid(row=7,column=7,sticky=NSEW)
+VPosicion233=StringVar()
+VArregloPos233=Entry(Frame4,textvariable=VPosicion233,width=5)
+VArregloPos233.grid(row=7,column=8,sticky=NSEW)
+VPosicion234=StringVar()
+VArregloPos234=Entry(Frame4,textvariable=VPosicion234,width=5)
+VArregloPos234.grid(row=7,column=9,sticky=NSEW)
+VPosicion235=StringVar()
+VArregloPos235=Entry(Frame4,textvariable=VPosicion235,width=5)
+VArregloPos235.grid(row=7,column=10,sticky=NSEW)
+VPosicion236=StringVar()
+VArregloPos236=Entry(Frame4,textvariable=VPosicion236,width=5)
+VArregloPos236.grid(row=7,column=11,sticky=NSEW)
+VPosicion237=StringVar()
+VArregloPos237=Entry(Frame4,textvariable=VPosicion237,width=5)
+VArregloPos237.grid(row=7,column=12,sticky=NSEW)
+VPosicion238=StringVar()
+VArregloPos238=Entry(Frame4,textvariable=VPosicion238,width=5)
+VArregloPos238.grid(row=7,column=13,sticky=NSEW)
+VPosicion239=StringVar()
+VArregloPos239=Entry(Frame4,textvariable=VPosicion239,width=5)
+VArregloPos239.grid(row=7,column=14,sticky=NSEW)
+VPosicion240=StringVar()
+VArregloPos240=Entry(Frame4,textvariable=VPosicion240,width=5)
+VArregloPos240.grid(row=7,column=15,sticky=NSEW)
+VPosicion241=StringVar()
+VArregloPos241=Entry(Frame4,textvariable=VPosicion241,width=5)
+VArregloPos241.grid(row=7,column=16,sticky=NSEW)
+VPosicion242=StringVar()
+VArregloPos242=Entry(Frame4,textvariable=VPosicion242,width=5)
+VArregloPos242.grid(row=7,column=17,sticky=NSEW)
+VPosicion243=StringVar()
+VArregloPos243=Entry(Frame4,textvariable=VPosicion243,width=5)
+VArregloPos243.grid(row=7,column=18,sticky=NSEW)
+VPosicion244=StringVar()
+VArregloPos244=Entry(Frame4,textvariable=VPosicion244,width=5)
+VArregloPos244.grid(row=7,column=19,sticky=NSEW)
+VPosicion245=StringVar()
+VArregloPos245=Entry(Frame4,textvariable=VPosicion245,width=5)
+VArregloPos245.grid(row=7,column=20,sticky=NSEW)
+VPosicion246=StringVar()
+VArregloPos246=Entry(Frame4,textvariable=VPosicion246,width=5)
+VArregloPos246.grid(row=7,column=21,sticky=NSEW)
+VPosicion247=StringVar()
+VArregloPos247=Entry(Frame4,textvariable=VPosicion247,width=5)
+VArregloPos247.grid(row=7,column=22,sticky=NSEW)
+VPosicion248=StringVar()
+VArregloPos248=Entry(Frame4,textvariable=VPosicion248,width=5)
+VArregloPos248.grid(row=7,column=23,sticky=NSEW)
+VPosicion249=StringVar()
+VArregloPos249=Entry(Frame4,textvariable=VPosicion249,width=5)
+VArregloPos249.grid(row=7,column=24,sticky=NSEW)
+VPosicion250=StringVar()
+VArregloPos250=Entry(Frame4,textvariable=VPosicion250,width=5)
+VArregloPos250.grid(row=7,column=25,sticky=NSEW)
+VPosicion251=StringVar()
+VArregloPos251=Entry(Frame4,textvariable=VPosicion251,width=5)
+VArregloPos251.grid(row=7,column=26,sticky=NSEW)
+VPosicion252=StringVar()
+VArregloPos252=Entry(Frame4,textvariable=VPosicion252,width=5)
+VArregloPos252.grid(row=7,column=27,sticky=NSEW)
+VPosicion253=StringVar()
+VArregloPos253=Entry(Frame4,textvariable=VPosicion253,width=5)
+VArregloPos253.grid(row=7,column=28,sticky=NSEW)
+VPosicion254=StringVar()
+VArregloPos254=Entry(Frame4,textvariable=VPosicion254,width=5)
+VArregloPos254.grid(row=7,column=29,sticky=NSEW)
+VPosicion255=StringVar()
+VArregloPos255=Entry(Frame4,textvariable=VPosicion255,width=5)
+VArregloPos255.grid(row=7,column=30,sticky=NSEW)
+VPosicion256=StringVar()
+VArregloPos256=Entry(Frame4,textvariable=VPosicion256,width=5)
+VArregloPos256.grid(row=7,column=31,sticky=NSEW)
+
+BotonCalculo=Button(Frame5, text="Cálculo Hamming", command=lambda : Hamming())
+BotonCalculo.grid(row=0, column=0)
+BotonCheck=Button(Frame5, text="Check", command=lambda : check())
+BotonCheck.grid(row=0, column=1)
+TramaTotal=StringVar()
+MostrarTramaTotalMensaje=Label(Frame6, text=" ")
+MostrarTramaTotalMensaje.grid(row=0, column=0)
+MostrarTramaTotal=Label(Frame6, textvariable=TramaTotal, text=" ")
+MostrarTramaTotal.grid(row=0, column=1)
+LabelError=Label(Frame6, text=" ")
+LabelError.grid(row=0, column=2)
+BotonUNRZ=Button(Frame7, text="UNRZ", command=lambda : UNRZ())
+BotonUNRZ.grid(row=0, column=0)
+BotonAMI=Button(Frame7, text="AMI", command=lambda : AMI())
+BotonAMI.grid(row=0, column=1)
+BotonHDB3=Button(Frame7, text="HDB3", command=lambda : HDB3())
+BotonHDB3.grid(row=0, column=2)
+LabelCodificacionCanal=Label(Frame7, text=" ")
+LabelCodificacionCanal.grid(row=8, column=0)
+
+ventana.mainloop()
