@@ -10,6 +10,10 @@ Code used for aritmetic encoding in python // Código usado para la codificació
 
 Code used for modified aritmetic encoding in python // Código usado para la codificación aritmética modificada en python
 
+-AutomatizacionHogarArduino
+
+Code used to simulate home automation in a small circuit with arduino // Código utilizado para simular domótica en un pequeño circuito con arduino
+
 -CodHuffman
 
 Code used for Huffman and Shanon Fano encoding in python // Código usado para la codificación de Huffman y Shannon Fano en python
