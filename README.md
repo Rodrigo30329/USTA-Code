@@ -30,6 +30,10 @@ Code used for DCPM encoding in python // Código usado para la codificación DCP
 
 Code used for Hamming encoding in python // Código usado para la codificación Hamming en python
 
+-Otros
+
+Code used for a calculator and some signal graphics on excel and matlab // Código utilizado para una calculadora y unos gráficos de señales en excel y matlab
+
 -HammingCompleto
 
 Code used for an application using different encoding techniques in python // Código usado para una aplicación usando diferentes técnicas de codificación en python
